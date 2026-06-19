@@ -1,0 +1,17 @@
+{
+  "name": "token-saver-meta",
+  "version": "0.1.0",
+  "description": "Zero-config token-saving protocol for AI coding agents — injects caveman + ponytail + LG-token-saver + kevin-copilot rules",
+  "author": {"name": "Im-Busy"},
+  "hooks": [
+    {
+      "type": "InstructionsLoaded",
+      "matchers": ["session_start", "compact"]
+    },
+    {
+      "type": "SessionStart",
+      "matchers": ["startup", "resume", "clear", "compact"]
+    }
+  ],
+  "skills": ["skills/token-saver/SKILL.md"]
+}
