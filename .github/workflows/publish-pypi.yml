@@ -1,0 +1,54 @@
+name: Publish to PyPI
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [tscg-py, token-saver-mem, contextslim-py, "."]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Install dependencies
+        run: |
+          if [ "${{ matrix.package }}" = "." ]; then
+            uv sync
+          else
+            uv sync --package ${{ matrix.package }}
+          fi
+      - name: Run tests
+        run: |
+          if [ "${{ matrix.package }}" = "." ]; then
+            uv run pytest tests/
+          else
+            uv run pytest ${{ matrix.package }}/tests/
+          fi
+
+  build-publish:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    strategy:
+      matrix:
+        package: [tscg-py, token-saver-mem, contextslim-py, "."]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Build package
+        run: |
+          if [ "${{ matrix.package }}" = "." ]; then
+            uv build
+          else
+            uv build --package ${{ matrix.package }}
+          fi
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          attestations: true
