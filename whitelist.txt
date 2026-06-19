@@ -10,9 +10,9 @@ install.sh
 tests/
 
 # === Documentation ===
-docs/
+docs/architecture-v2.md
+docs/publishing.md
 AGENTS.md
-BESTS.md
 README.md
 CLAUDE.md
 
