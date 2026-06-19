@@ -54,6 +54,17 @@ def generate_server_entry(server_name: str, server_def: dict, mcp_family: str) -
     return {server_name: dict(family_def)}
 
 
+def _get_core_mcp_server_names() -> frozenset[str]:
+    """Return frozenset of MCP server names derived from core_bundle_tools."""
+    matrix = load_matrix()
+    core_bundle = matrix.get("token_saver_meta", {}).get("core_bundle_tools", [])
+    mcp_servers = matrix.get("mcp_servers", {})
+    return frozenset(
+        name for name in core_bundle
+        if f"{name}_server" in mcp_servers
+    )
+
+
 def generate_mcp_config(platform_id: str, cgc_path: str | None = None) -> dict | None:
     """Generate MCP config for a single platform. Returns None if platform unknown."""
     matrix = load_matrix()
@@ -64,13 +75,18 @@ def generate_mcp_config(platform_id: str, cgc_path: str | None = None) -> dict |
     family = pdef["mcp_family"]
     wrapper_key = matrix["mcp_families"][family]["wrapper_key"]
 
-    gn_entry = generate_server_entry("gitnexus", matrix["mcp_servers"]["gitnexus_server"], family)
-    cgc_entry = generate_server_entry("codegraphcontext", matrix["mcp_servers"]["codegraphcontext_server"], family)
+    all_entries: dict[str, dict] = {}
+    for tool_name in _get_core_mcp_server_names():
+        server_key = f"{tool_name}_server"
+        server_def = matrix["mcp_servers"][server_key]
+        entry = generate_server_entry(tool_name, server_def, family)
+        all_entries.update(entry)
 
-    if cgc_path:
-        cgc_entry["codegraphcontext"]["cwd" if "cwd" in cgc_entry["codegraphcontext"] else "workdir"] = cgc_path
+    if cgc_path and "codegraphcontext" in all_entries:
+        cgc_entry = all_entries["codegraphcontext"]
+        cgc_entry["cwd" if "cwd" in cgc_entry else "workdir"] = cgc_path
 
-    return {wrapper_key: {**gn_entry, **cgc_entry}}
+    return {wrapper_key: all_entries}
 
 
 def generate_cgc_only_config(platform_id: str, project_path: str) -> dict | None:
@@ -290,8 +306,8 @@ def cmd_setup(project_path: Path, cgc_path: str | None, skip_index: bool = False
 
 
 def generate_all_mcp_entries(platform_id: str, cgc_path: str | None = None) -> dict | None:
-    """Generate MCP entries for ALL token-saver MCP servers for a platform.
-    Wraps existing generate_mcp_config() to ensure GitNexus+CGC are both included."""
+    """Generate MCP entries for ALL core-bundle MCP servers for a platform.
+    Iterates core_bundle_tools dynamically via _get_core_mcp_server_names()."""
     return generate_mcp_config(platform_id, cgc_path)
 
 
@@ -314,9 +330,9 @@ def merge_token_saver_entries(existing: dict, platform_id: str, cgc_path: str | 
 
 def remove_token_saver_entries(existing: dict) -> dict:
     """Remove ALL token-saver MCP entries from an existing config.
-    Removes entries whose names start with 'gitnexus' or 'codegraphcontext'.
+    Removes entries whose names start with any core MCP server name.
     Preserves all non-token-saver entries."""
-    token_saver_prefixes = ("gitnexus", "codegraphcontext")
+    token_saver_prefixes = tuple(_get_core_mcp_server_names())
 
     for wrapper_key in existing:
         if isinstance(existing[wrapper_key], dict):
@@ -332,7 +348,7 @@ def remove_token_saver_entries(existing: dict) -> dict:
 
 def has_token_saver_entries(existing: dict) -> bool:
     """Check if any token-saver MCP entries exist in the config."""
-    token_saver_prefixes = ("gitnexus", "codegraphcontext")
+    token_saver_prefixes = tuple(_get_core_mcp_server_names())
 
     for wrapper_key in existing:
         if isinstance(existing[wrapper_key], dict):

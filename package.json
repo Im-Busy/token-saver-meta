@@ -34,6 +34,16 @@
     "src/",
     "platforms/",
     "skills/",
-    "templates/"
+    "templates/",
+    ".kilo/skills/",
+    ".claude/skills/",
+    ".codex/skills/",
+    ".factory/skills/",
+    ".gemini/skills/",
+    ".hermes/skills/",
+    ".kiro/skills/",
+    ".mastracode/skills/",
+    ".pi/skills/",
+    "distribution/"
   ]
 }

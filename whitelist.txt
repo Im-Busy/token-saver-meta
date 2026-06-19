@@ -43,5 +43,29 @@ whitelist.txt
 # === Claude Code Plugin ===
 .claude-plugin/
 
+# === Platform Skills ===
+.kilo/skills/
+.claude/skills/
+.codex/skills/
+.factory/skills/
+.gemini/skills/
+.hermes/skills/
+.kiro/skills/
+.mastracode/skills/
+.pi/skills/
+.opencode/skills/
+
 # === Distribution ===
 distribution/
+distribution/codex/
+distribution/kilo/
+distribution/cline/
+distribution/roo-code/
+distribution/continue/
+distribution/augment/
+distribution/factory/
+distribution/gemini/
+distribution/hermes/
+distribution/kiro/
+distribution/mastracode/
+distribution/pi/
