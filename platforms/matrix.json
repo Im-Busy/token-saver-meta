@@ -1,0 +1,384 @@
+{
+  "$schema": "https://gitnexus-cgc-combo.dev/platform-matrix.schema.json",
+  "version": "2.0.0",
+  "description": "Token Saver Meta — platform matrix for 10 core token-saving tools across 18 AI agent platforms. Maps each platform to its MCP config format, file paths, and capabilities.",
+  "mcp_families": {
+    "mcpServers": {
+      "wrapper_key": "mcpServers",
+      "server_format": {
+        "command": "string (executable name)",
+        "args": ["array of strings"],
+        "env": "optional object of env vars"
+      },
+      "platforms": ["claude-code", "cursor", "cline", "roo-code", "continue", "windsurf", "augment", "copilot-cli", "codex", "factory", "gemini", "hermes", "mastracode", "pi"]
+    },
+    "mcp": {
+      "wrapper_key": "mcp",
+      "server_format": {
+        "type": "local",
+        "command": ["array of strings (executable + args combined)"],
+        "workdir": "optional string (working directory)"
+      },
+      "platforms": ["kilo", "opencode", "kiro"]
+    },
+    "servers": {
+      "wrapper_key": "servers",
+      "server_format": {
+        "type": "stdio",
+        "command": "string (executable name)",
+        "args": ["array of strings"],
+        "env": "optional object of env vars"
+      },
+      "platforms": ["copilot-vscode"]
+    }
+  },
+  "platforms": {
+    "kilo": {
+      "name": "Kilo",
+      "mcp_family": "mcp",
+      "mcp_file": ".kilo/kilo.json",
+      "instructions_files": ["AGENTS.md"],
+      "skills_dir": ".kilo/skills",
+      "skills_supported": true,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [".kilo/", "kilo.json", ".kilo/kilo.json"],
+      "note": "MCP servers go under the 'mcp' key with 'type': 'local'. Merge with any existing mcp entries."
+    },
+    "claude-code": {
+      "name": "Claude Code",
+      "mcp_family": "mcpServers",
+      "mcp_file": ".mcp.json",
+      "instructions_files": ["CLAUDE.md", "AGENTS.md"],
+      "skills_dir": ".claude/skills",
+      "skills_supported": true,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [".mcp.json", "CLAUDE.md", ".claude/"],
+      "note": "Standard mcpServers format. Skills directory is .claude/skills/."
+    },
+    "cursor": {
+      "name": "Cursor",
+      "mcp_family": "mcpServers",
+      "mcp_file": ".cursor/mcp.json",
+      "instructions_files": [".cursor/rules/combo.md", ".cursorrules", "AGENTS.md"],
+      "skills_dir": null,
+      "skills_supported": false,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [".cursor/", ".cursorrules"],
+      "note": "Uses .cursor/rules/ for instructions. No native skill system — embed rules in AGENTS.md sections."
+    },
+    "cline": {
+      "name": "Cline",
+      "mcp_family": "mcpServers",
+      "mcp_file": ".cline/mcp.json",
+      "instructions_files": [".clinerules", "AGENTS.md"],
+      "skills_dir": null,
+      "skills_supported": false,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [".cline/", ".clinerules", "CLINE.md"],
+      "note": "Also reads .clinerules directory for multiple rule files."
+    },
+    "roo-code": {
+      "name": "Roo Code",
+      "mcp_family": "mcpServers",
+      "mcp_file": ".roo/mcp.json",
+      "instructions_files": [".roorules", "AGENTS.md"],
+      "skills_dir": null,
+      "skills_supported": false,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [".roo/", ".roorules"],
+      "note": "Falls back to .cursorrules if .roorules is missing."
+    },
+    "continue": {
+      "name": "Continue.dev",
+      "mcp_family": "mcpServers",
+      "mcp_file": ".continue/mcpServers/gitnexus-cgc.json",
+      "instructions_files": [".continue/rules/combo.md", "AGENTS.md"],
+      "skills_dir": null,
+      "skills_supported": false,
+      "auto_mcp": true,
+      "merge_strategy": "create-standalone-file",
+      "detection_markers": [".continue/", "config.yaml", "config.ts"],
+      "note": "Each MCP server is a separate .json or .yaml file in .continue/mcpServers/. We create a standalone file to avoid conflicting with user config."
+    },
+    "windsurf": {
+      "name": "Windsurf",
+      "mcp_family": "mcpServers",
+      "mcp_file": null,
+      "instructions_files": [".windsurfrules", "AGENTS.md"],
+      "skills_dir": null,
+      "skills_supported": false,
+      "auto_mcp": false,
+      "mcp_manual": true,
+      "mcp_manual_destination": "~/.codeium/windsurf/mcp_config.json (global — paste into Windsurf MCP Settings panel)",
+      "merge_strategy": "print-for-manual-paste",
+      "detection_markers": [".windsurf/", ".windsurfrules"],
+      "note": "No project-level MCP config. User must paste into global Windsurf MCP settings. We print the JSON for them."
+    },
+    "augment": {
+      "name": "Augment Code",
+      "mcp_family": "mcpServers",
+      "mcp_file": null,
+      "instructions_files": [".augment/rules/combo.md", "AGENTS.md"],
+      "skills_dir": null,
+      "skills_supported": false,
+      "auto_mcp": false,
+      "mcp_manual": true,
+      "mcp_manual_destination": "~/.augment/settings.json (global — use Augment Easy MCP panel or Import from JSON)",
+      "merge_strategy": "print-for-manual-paste",
+      "detection_markers": [".augment/"],
+      "note": "No project-level MCP config. User adds servers via IDE settings or CLI --mcp-config flag."
+    },
+    "copilot-vscode": {
+      "name": "GitHub Copilot (VS Code)",
+      "mcp_family": "servers",
+      "mcp_file": ".vscode/mcp.json",
+      "instructions_files": [".github/copilot-instructions.md", "AGENTS.md"],
+      "skills_dir": null,
+      "skills_supported": false,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [".vscode/mcp.json", ".github/copilot-instructions.md"],
+      "note": "VS Code uses 'servers' key with 'type': 'stdio'. Different from CLI which uses 'mcpServers'."
+    },
+    "copilot-cli": {
+      "name": "GitHub Copilot (CLI)",
+      "mcp_family": "mcpServers",
+      "mcp_file": ".mcp.json",
+      "instructions_files": ["AGENTS.md"],
+      "skills_dir": null,
+      "skills_supported": false,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [],
+      "note": "CLI mode uses standard mcpServers format. Only detected if .mcp.json exists but no other CLI platform markers are found."
+    },
+    "opencode": {
+      "name": "Opencode",
+      "mcp_family": "mcp",
+      "mcp_file": "opencode.json",
+      "instructions_files": ["AGENTS.md"],
+      "skills_dir": null,
+      "skills_supported": false,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": ["opencode.json", ".opencode/"],
+      "note": "Uses 'mcp' key with 'type': 'local' (same as Kilo). Supports Agent Skills spec via .opencode/skills/. Instructions can also be embedded in opencode.json."
+    },
+    "codex": {
+      "name": "Codex",
+      "mcp_family": "mcpServers",
+      "mcp_file": ".mcp.json",
+      "instructions_files": ["AGENTS.md"],
+      "skills_dir": ".codex/skills",
+      "skills_supported": true,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [".codex/"],
+      "note": "Standard mcpServers format. Skills via .codex/skills/."
+    },
+    "factory": {
+      "name": "FactoryAI",
+      "mcp_family": "mcpServers",
+      "mcp_file": ".mcp.json",
+      "instructions_files": ["AGENTS.md"],
+      "skills_dir": ".factory/skills",
+      "skills_supported": true,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [".factory/"],
+      "note": "Standard mcpServers format. Skills via .factory/skills/."
+    },
+    "gemini": {
+      "name": "Gemini CLI",
+      "mcp_family": "mcpServers",
+      "mcp_file": ".mcp.json",
+      "instructions_files": ["AGENTS.md"],
+      "skills_dir": ".gemini/skills",
+      "skills_supported": true,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [".gemini/"],
+      "note": "Standard mcpServers format. Skills via .gemini/skills/."
+    },
+    "hermes": {
+      "name": "Hermes",
+      "mcp_family": "mcpServers",
+      "mcp_file": ".mcp.json",
+      "instructions_files": ["AGENTS.md"],
+      "skills_dir": ".hermes/skills",
+      "skills_supported": true,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [".hermes/"],
+      "note": "Standard mcpServers format. Skills via .hermes/skills/."
+    },
+    "kiro": {
+      "name": "Kiro",
+      "mcp_family": "mcp",
+      "mcp_file": "kiro.json",
+      "instructions_files": ["AGENTS.md"],
+      "skills_dir": ".kiro/skills",
+      "skills_supported": true,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [".kiro/", "kiro.json"],
+      "note": "Uses 'mcp' key with 'type': 'local' (same as Kilo). Skills via .kiro/skills/."
+    },
+    "mastracode": {
+      "name": "Mastra Code",
+      "mcp_family": "mcpServers",
+      "mcp_file": ".mcp.json",
+      "instructions_files": ["AGENTS.md"],
+      "skills_dir": ".mastracode/skills",
+      "skills_supported": true,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [".mastracode/"],
+      "note": "Standard mcpServers format. Skills via .mastracode/skills/."
+    },
+    "pi": {
+      "name": "Pi Agent",
+      "mcp_family": "mcpServers",
+      "mcp_file": ".mcp.json",
+      "instructions_files": ["AGENTS.md"],
+      "skills_dir": ".pi/skills",
+      "skills_supported": true,
+      "auto_mcp": true,
+      "merge_strategy": "merge-into-existing-json",
+      "detection_markers": [".pi/"],
+      "note": "Standard mcpServers format. Skills via .pi/skills/."
+    }
+  },
+  "mcp_servers": {
+    "gitnexus_server": {
+      "description": "GitNexus — graph-based code intelligence and impact analysis (T1)",
+      "failure_mode": "warn",
+      "required_binaries": ["node"],
+      "optional": true,
+      "note": "PolyForm Noncommercial license — cannot bundle in commercial distributions. Moved to Optional module.",
+      "mcpServers_format": {
+        "command": "npx",
+        "args": ["-y", "gitnexus@latest", "mcp"]
+      },
+      "mcp_format": {
+        "type": "local",
+        "command": ["npx", "-y", "gitnexus@latest", "mcp"]
+      },
+      "servers_format": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "gitnexus@latest", "mcp"]
+      }
+    },
+    "codegraphcontext_server": {
+      "description": "CGC — SQLite+FTS5 graph queries, dead code detection, hierarchy analysis (T1)",
+      "failure_mode": "warn",
+      "required_binaries": ["node"],
+      "mcpServers_format": {
+        "command": "npx",
+        "args": ["-y", "codegraph", "mcp"]
+      },
+      "mcp_format": {
+        "type": "local",
+        "command": ["npx", "-y", "codegraph", "mcp"]
+      },
+      "servers_format": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "codegraph", "mcp"]
+      }
+    }
+  },
+  "one_shot_tools": {
+    "codesight_tool": {
+      "description": "codesight — static context map generator (7x-91x T1 savings). One-shot CLI, not an MCP server.",
+      "command": ["npx", "-y", "codesight"],
+      "run_strategy": "once",
+      "output_file": "CODESIGHT.md",
+      "failure_mode": "warn",
+      "required_binaries": ["node"]
+    },
+    "repomix_tool": {
+      "description": "Repomix — one-shot repo packer for AI-friendly codebase context (~70% T1 savings)",
+      "command": ["npx", "-y", "repomix"],
+      "run_strategy": "once",
+      "output_file": "repomix-output.txt",
+      "failure_mode": "warn",
+      "required_binaries": ["node"]
+    }
+  },
+  "skill_tools": {
+    "caveman_skill": {
+      "description": "caveman — ultra-compressed agent output (~75% T3 savings). SKILL.md with intensity levels.",
+      "source_path": "useful-repos/caveman/skills/caveman/SKILL.md",
+      "dest_filename": "SKILL.md",
+      "install_strategy": "copy-skill",
+      "failure_mode": "warn"
+    },
+    "lg_token_saver_skill": {
+      "description": "LG-token-saver — behavioral rules for input+output+context optimization (87% claimed T1+T2+T3)",
+      "source_path": "useful-repos/LG-token-saver/SKILL.md",
+      "dest_filename": "SKILL.md",
+      "install_strategy": "copy-skill",
+      "failure_mode": "warn"
+    },
+    "kevin_copilot_skill": {
+      "description": "kevin-copilot — terseness instruction files and unslop cleanup (66-89% T3 savings)",
+      "source_paths": ["useful-repos/kevin-copilot/.github/copilot-instructions.md", "useful-repos/kevin-copilot/.github/skills/unslop/SKILL.md"],
+      "install_strategy": "copy-skill",
+      "failure_mode": "warn"
+    }
+  },
+  "binary_tools": {
+    "rtk_binary": {
+      "description": "RTK — CLI output compression via hook-based filtering (60-90% T2 savings). 62K stars.",
+      "download_url_template": "https://github.com/rtk-ai/rtk/releases/latest/download/rtk-{os}-{arch}.{ext}",
+      "verify_command": ["rtk", "--version"],
+      "init_command": ["rtk", "init", "-g"],
+      "install_strategy": "binary-download",
+      "failure_mode": "warn",
+      "fallback": "cargo install --git https://github.com/rtk-ai/rtk",
+      "required_binaries": []
+    }
+  },
+  "cli_tools": {
+    "contextslimai_cli": {
+      "description": "ContextSlimAI — CLI wrappers and AI rules generation (T2 savings via CLI replacement)",
+      "init_command": ["npx", "contextslim", "init"],
+      "generated_files": [".cursorrules", "CLAUDE.md"],
+      "install_strategy": "cli-init",
+      "failure_mode": "warn",
+      "required_binaries": ["node"]
+    }
+  },
+  "token_saver_meta": {
+    "version": "0.1.0",
+    "core_bundle_tools": [
+      "gitnexus",
+      "codegraphcontext",
+      "rtk",
+      "codesight",
+      "repomix",
+      "caveman",
+      "lg-token-saver",
+      "kevin-copilot",
+      "contextslimai",
+      "token-saver-meta"
+    ],
+    "optional_modules": [
+      "tscg",
+      "lean-ctx",
+      "llmlingua",
+      "codex-agent-mem",
+      "loom",
+      "deblank",
+      "toon",
+      "orchestkit-skills"
+    ]
+  }
+}

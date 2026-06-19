@@ -1,0 +1,16 @@
+{
+  "name": "create-token-saver",
+  "version": "0.1.0",
+  "description": "Token Saving for the Masses — zero-config token-saving toolkit",
+  "bin": {
+    "create-token-saver": "./cli.js"
+  },
+  "files": [
+    "cli.js",
+    "src/",
+    "platforms/",
+    "skills/",
+    "templates/",
+    "dashboard/"
+  ]
+}

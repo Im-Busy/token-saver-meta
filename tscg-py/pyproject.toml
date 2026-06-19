@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tscg"
+version = "0.1.0"
+description = "Tool Schema Compression Gateway — compress MCP tool schemas by 50-72%"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.0",
+    "click>=8.0",
+]
+
+[project.scripts]
+tscg = "tscg.__main__:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.0",
+]

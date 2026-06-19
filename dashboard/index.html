@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Token Saver Meta — Dashboard</title>
+<style>
+  body { font-family: 'Courier New', monospace; background: #1a1a2e; color: #e0e0e0; margin: 0; padding: 20px; }
+  h1 { color: #00d4aa; font-size: 24px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  th { background: #16213e; color: #00d4aa; padding: 12px; text-align: left; font-size: 14px; }
+  td { padding: 10px 12px; border-bottom: 1px solid #333; font-size: 13px; }
+  .ok { color: #00d4aa; } .warn { color: #e6a817; } .skip { color: #666; }
+  .footer { margin-top: 30px; color: #666; font-size: 11px; border-top: 1px solid #333; padding-top: 15px; }
+</style>
+</head>
+<body>
+<h1>Token Saver Meta — Tool Status</h1>
+<table>
+  <tr><th>Tool</th><th>Status</th><th>Version</th><th>Estimated Savings</th></tr>
+  <tr><td>GitNexus</td><td class="ok">&#10003; Indexed</td><td>latest</td><td>7x-91x (benchmarked)</td></tr>
+  <tr><td>CGC</td><td class="ok">&#10003; Indexed</td><td>latest</td><td>Graph queries (T1)</td></tr>
+  <tr><td>RTK</td><td class="warn">&#8226; Check</td><td>&mdash;</td><td>60-90% (benchmarked)</td></tr>
+  <tr><td>codesight</td><td class="warn">&#8226; Check</td><td>&mdash;</td><td>~70% (self-reported)</td></tr>
+  <tr><td>Repomix</td><td class="warn">&#8226; Check</td><td>&mdash;</td><td>~70% (self-reported)</td></tr>
+  <tr><td>caveman</td><td class="ok">&#10003; Skill</td><td>&mdash;</td><td>~75% (self-reported)</td></tr>
+  <tr><td>LG-token-saver</td><td class="ok">&#10003; Skill</td><td>&mdash;</td><td>87% claimed (self-reported)</td></tr>
+  <tr><td>kevin-copilot</td><td class="ok">&#10003; Skill</td><td>&mdash;</td><td>66-89% (CI-gated)</td></tr>
+  <tr><td>ContextSlimAI</td><td class="skip">&mdash;</td><td>&mdash;</td><td>CLI wrappers (T2)</td></tr>
+  <tr><td>Token Saver Meta</td><td class="ok">&#10003; v0.1.0</td><td>0.1.0</td><td>&mdash;</td></tr>
+</table>
+<div class="footer">
+  <p>Notes: * self-reported, &dagger; benchmarked by category, &Dagger; CI-gated evals. Do not add percentages across token types.</p>
+  <p>Token Saver Meta v0.1.0 &mdash; Token Saving for the Masses</p>
+</div>
+</body>
+</html>

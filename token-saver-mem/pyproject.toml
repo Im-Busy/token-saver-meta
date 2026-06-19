@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "token-saver-mem"
+version = "0.1.0"
+description = "Cross-session memory for token saving — Python rewrite of codex-agent-mem + Loom"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.0",
+    "click>=8.0",
+]
+
+[project.scripts]
+token-saver-mem = "token_saver_mem.__main__:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.0",
+]
