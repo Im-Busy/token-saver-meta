@@ -121,6 +121,33 @@ The token-saving protocol is injected into this AGENTS.md below. All development
 
 ---
 
+## Repository Architecture — Dual-Repo (Private → Public)
+
+This project uses a **dual-remote** Git architecture to publish a curated subset to a public mirror while keeping internal files private.
+
+| Remote | Branch | Purpose |
+|--------|--------|---------|
+| `private` | `master` | All files, full history |
+| `public` | `public` | Curated files only |
+
+### What Goes Public
+
+Source code (`src/`, `cli.js`), tests (`tests/`), documentation (`docs/`, `AGENTS.md`, `BESTS.md`, `README.md`), configs (`package.json`, `pyproject.toml`, `uv.lock`, `.gitignore`, `.gitattributes`), assets (`templates/`, `skills/`, `platforms/`, `dashboard/`), license (`LICENSE`), and all sub-projects (`tscg-py/`, `token-saver-mem/`, `contextslim-py/`).
+
+### What Stays Private
+
+`MEMORY.md`, `kilo.json`, `opencode.jsonc`, `token-saver-meta.md`, `.kilo/`, `.omo/`, `.codegraph/`, `progress_docs/`
+
+### Sync Commands
+
+| Command | Usage |
+|---------|-------|
+| `/repo-sync` | Full sync: merge master → public → safety check → push |
+| `/repo-sync check` | Safety check only — verify no private files on public branch |
+| `/repo-sync status` | Show current branch state and remote config |
+
+---
+
 ## Quick Reference: Token Types (T1-T7)
 
 | Type | What It Is | Heavy Tools |
