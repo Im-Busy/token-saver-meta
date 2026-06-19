@@ -32,7 +32,7 @@ Copy the appropriate file to your project root. The content is identical — onl
 
 ## What's Included
 
-All files contain the **Token Saving Protocol** — 28 rules merging caveman (prose terseness), ponytail (YAGNI code minimalism), LG-token-saver (operational efficiency), and kevin-copilot (structured terseness).
+All files contain the **Token Saving Protocol** — 28 rules across four dimensions: prose terseness, code minimalism, operational efficiency, and structured output.
 
 The protocol reduces token consumption by ~40% on agent output (T3) and agent instructions (T7). Active every response. No mode switching required.
 

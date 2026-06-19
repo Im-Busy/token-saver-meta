@@ -1,7 +1,7 @@
 {
   "name": "token-saver-meta",
   "version": "0.1.0",
-  "description": "Zero-config token-saving protocol for AI coding agents — injects caveman + ponytail + LG-token-saver + kevin-copilot rules",
+  "description": "Zero-config token-saving protocol — 28 rules across four dimensions for AI coding agents",
   "author": {"name": "Im-Busy"},
   "hooks": [
     {

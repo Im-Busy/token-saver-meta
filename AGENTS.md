@@ -16,13 +16,14 @@ Build a single installable package that gives any AI coding tool (on any platfor
 
 Every new AI session MUST read these files in order:
 
-1. **`MEMORY.md`** — Persistent handover state, current phase, next actions
-2. **`progress_docs/current.md`** — Most recent session log
-3. **`progress_docs/plans/full.md`** — Master plan, all phases, deferred items
-4. **`docs/insights_and_synergies.md`** — ⭐ COMPLETE: 39 insights + 24 synergies from all 63 sources
-5. **`BESTS.md`** — Tool ranking leaderboard (46 tools, 4 tiers)
-6. **`docs/architecture-v2.md`** — ⭐ AUTHORITATIVE architecture (Hybrid: Base + Intelligence + Compression + Optional)
-7. **`docs/rewrite-strategy.md`** — Which tools we bundle, which we rewrite, vendoring decisions
+1. **`C:\Dev\.opencode\standards\mcp-policy.md`** — System-wide MCP management policy
+2. **`MEMORY.md`** — Persistent handover state, current phase, next actions
+3. **`progress_docs/current.md`** — Most recent session log
+4. **`progress_docs/plans/full.md`** — Master plan, all phases, deferred items
+5. **`docs/insights_and_synergies.md`** — ⭐ COMPLETE: 39 insights + 24 synergies from all 63 sources
+6. **`BESTS.md`** — Tool ranking leaderboard (46 tools, 4 tiers)
+7. **`docs/architecture-v2.md`** — ⭐ AUTHORITATIVE architecture (Hybrid: Base + Intelligence + Compression + Optional)
+8. **`docs/rewrite-strategy.md`** — Which tools we bundle, which we rewrite, vendoring decisions
 
 ---
 
@@ -30,39 +31,41 @@ Every new AI session MUST read these files in order:
 
 > ⭐ **AUTHORITATIVE:** Full architecture at `docs/architecture-v2.md`. This section is a summary only.
 
-### Base Layer (instant, zero deps — SKILL.md text, always active)
-| # | Tool | Token Types | Stars | Mechanism |
-|---|------|:----------:|------:|-----------|
-| 1 | **caveman** | T3 | 74K | Prose terseness (~75%) |
-| 2 | **ponytail** | T3 | 35K | YAGNI code minimalism (~54% LOC) |
-| 3 | **LG-token-saver** | T1+T2+T3 | 23 | Operational efficiency (8 rules) |
-| 4 | **kevin-copilot** | T3 | 5 | Structured terseness (4 modes) |
+### Agent Behavior Layer (instant, zero deps — SKILL.md text, always active)
+| Dimension | Mechanism |
+|-----------|-----------|
+| **Prose terseness** | Concise language, no filler, no hedging |
+| **Code minimalism** | YAGNI ladder: stdlib → native → dep → one-liner → minimal |
+| **Operational efficiency** | Parallel execution, grep-first, batch calls, no repeats |
+| **Structured output** | Consistent formatting, technical terms exact |
 
-→ All 4 vendored as text → merged into a single 55-line AGENTS.md block. Active in <1s. Saves ~40% on T3+T7.
+→ 4 vendored SKILL.md rules merged into a single AGENTS.md block. Active in <1s. Saves ~40% on agent output and instructions.
 
-### Intelligence Layer (auto-install, Node.js first)
-| # | Tool | Token Types | Stars | Mechanism |
-|---|------|:----------:|------:|-----------|
-| 5 | **CGC/codegraph** | T1 | 51K | SQLite+FTS5 graph queries (MCP, npx) |
-| 6 | **codesight** | T1 | 1.1K | Context map generator (7x-91x, one-shot, npx) |
-| 7 | **Repomix** | T1 | 26K | Repo packing (~70%, one-shot, npx) |
+### Intelligence Layer (auto-install)
+| Capability | Mechanism |
+|-----------|-----------|
+| **Code graph queries** | SQLite+FTS5 semantic search |
+| **Context mapping** | Pre-built project structure maps (7x-91x compression) |
+| **Repo packing** | Full repo → single file (~70% compression) |
 
-→ GitNexus (42K stars) moved to Optional — PolyForm Noncommercial license.
+→ Auto-installed via package manager. One-shot or on-demand.
 
 ### Compression Layer (auto-install)
-| # | Tool | Token Types | Stars | Mechanism |
-|---|------|:----------:|------:|-----------|
-| 8 | **RTK** | T2 | 63K | Shell compression (PreToolUse hook, binary) |
-| 9 | **ContextSlimAI** | T2 | 0 | CLI wrappers + rules generation (🔴 Python rewrite) |
+| Capability | Mechanism |
+|-----------|-----------|
+| **Shell output filtering** | Pre-execution hook rewrites commands |
+| **CLI optimization** | Slim command replacements + rule generation |
+
+→ Auto-installed. Transparent to the user.
 
 ### Optional Modules (one-click enable)
-| # | Tool | Token Types | Stars | Why Optional |
-|---|------|:----------:|------:|-------------|
-| 10 | **TSCG** | T6 | 18 | Schema compression 50-72% (🔴 Python rewrite) |
-| 11 | **Unified T5 Memory** | T5 | — | Merge codex-agent-mem + Loom (🔴 Python rewrite) |
-| 12 | **LLMLingua-2** | T4 | 6K | Prompt compression (GPU auto-detect) |
-| 13 | **SkillOpt** | T7 | 8K | Skill document optimization |
-| 14 | **GitNexus** | T1 | 42K | Non-commercial only (PolyForm NC license) |
+| Capability | Why Optional |
+|-----------|-------------|
+| **Schema compression** | 50-72% on MCP tool definitions |
+| **Cross-session memory** | Indexed code + session continuity |
+| **Prompt optimization** | ML-based token removal (GPU auto-detect) |
+| **Skill tuning** | Document optimization |
+
 
 ---
 
@@ -70,10 +73,7 @@ Every new AI session MUST read these files in order:
 
 - **Architecture v2 is authoritative** — `docs/architecture-v2.md`. Hybrid: Base (SKILL.md) + Intelligence (MCP) + Compression (binary/CLI) + Optional (one-click).
 - **Base layer is 4 vendored SKILL.md rules** — merged into a single 55-line AGENTS.md block. Instant, zero deps, works everywhere.
-- **6 micro-tools (<1K stars) require rewrite or vendoring** — ContextSlimAI, TSCG, codex-agent-mem, Loom rewritten; LG-token-saver, kevin-copilot vendored as text.
 - **Only 1 genuine conflict** — RTK shell hook vs lean-ctx shell hook. RTK wins, lean-ctx gets shell hook disabled.
-- **CGC uses SQLite+FTS5+SQL+BFS, NOT Neo4j+Cypher** — corrected 2026-06-18 from earlier architecture docs.
-- **GitNexus uses PolyForm Noncommercial** — cannot bundle in any commercial distribution. Moved to Optional.
 - **All savings claims must cite source** — benchmarked / self-reported / unverified.
 - **T4/T5/T6 are optional-only in v1** — heaviest types (T1+T2) get core coverage first.
 
@@ -85,10 +85,10 @@ Every new AI session MUST read these files in order:
 The token-saving protocol is injected into this AGENTS.md below. All development agents working on this project must follow the protocol.
 
 ### When Building or Modifying Code
-1. Follow YAGNI ladder (ponytail Rule 12) — stdlib first, minimal code
-2. Use SubAgents for exploration across >3 files (LG-token-saver Rule 19)
-3. Batch independent tool calls (LG-token-saver Rule 21)
-4. Never search the same thing twice (LG-token-saver Rule 22)
+1. Follow YAGNI ladder (code minimalism) — stdlib first, minimal code
+2. Use SubAgents for exploration across >3 files (operational efficiency)
+3. Batch independent tool calls
+4. Never search the same thing twice
 
 ### When Researching or Evaluating Tools
 1. Clone everything first, filter later (Insight I36)
@@ -152,22 +152,21 @@ Source code (`src/`, `cli.js`), tests (`tests/`), documentation (`docs/`, `AGENT
 
 | Type | What It Is | Heavy Tools |
 |:----:|-----------|-------------|
-| T1 | Exploration (reading files) | CGC, codesight, Repomix |
-| T2 | Shell output (CLI results) | RTK, ContextSlimAI |
-| T3 | Agent output (what agent says) | caveman, ponytail, LG-token-saver, kevin-copilot |
-| T4 | Prompt input (API requests) | LLMLingua-2 |
-| T5 | Repeated knowledge (cross-session) | Unified T5 Memory |
-| T6 | Tool schema (MCP definitions) | TSCG |
-| T7 | Instructions (AGENTS.md, rules) | caveman, ponytail, LG-token-saver, kevin-copilot, SkillOpt |
+| T1 | Exploration (reading files) | Code graph, context maps, repo packing |
+| T2 | Shell output (CLI results) | Shell filtering, CLI optimization |
+| T3 | Agent output (what agent says) | Prose terseness, code minimalism, operational efficiency, structured output |
+| T4 | Prompt input (API requests) | Prompt optimization |
+| T6 | Tool schema (MCP definitions) | Schema compression |
+| T7 | Instructions (AGENTS.md, rules) | Prose terseness, code minimalism, operational efficiency, structured output, skill tuning |
 
 
 <!-- TOKEN_SAVER_START -->
 ## Token Saving Protocol
 
 > Auto-generated by Token Saver Meta. Active every response. No mode switching â€” all rules always active.
-> Sources: caveman (prose style), ponytail (code minimalism), LG-token-saver (operations), kevin-copilot (structure).
+> 28 rules across four dimensions: prose style, code minimalism, operational efficiency, and structured output.
 
-### Output Style (caveman + kevin-copilot)
+### Output Style
 
 1. **No preamble.** Never "Sure!", "Certainly", "I'd be happy to", "Here is", "Let me".
 2. **No closing filler.** Never "Hope that helps", "Let me know", "Happy coding".
@@ -181,7 +180,7 @@ Source code (`src/`, `cli.js`), tests (`tests/`), documentation (`docs/`, `AGENT
 10. **No tool-call narration, no decorative tables/emoji, no dumping long raw error logs** unless asked â€” quote the shortest decisive line.
 11. **Response target:** under 60 words of prose for typical questions. Code blocks don't count.
 
-### Code Minimalism (ponytail)
+### Code Minimalism
 
 12. **YAGNI ladder.** Before writing code, stop at the first rung that holds:
     1. Does this need to be built at all?
@@ -197,7 +196,7 @@ Source code (`src/`, `cli.js`), tests (`tests/`), documentation (`docs/`, `AGENT
 17. **Mark intentional simplifications** with a `ponytail:` comment. If the shortcut has a known ceiling (global lock, O(nÂ²) scan, naive heuristic), name the ceiling and the upgrade path.
 18. **Non-trivial logic leaves ONE runnable check** â€” the smallest thing that fails if the logic breaks (assert-based demo or small test). Trivial one-liners need no test.
 
-### Operational Efficiency (LG-token-saver)
+### Operational Efficiency
 
 19. **SubAgent for exploration.** When searching across >3 files, dispatch an Explore subagent. Main session receives only the summary.
 20. **Grep before Read.** Before reading any file >500 lines, Grep for the target symbol first. Read only relevant lines (â‰¤30). Exception: files <500 lines with clear context need.

@@ -8,14 +8,14 @@ A meta-package that bundles token-saving tools across ALL layers of LLM token co
 
 Hybrid across 4 layers:
 
-| Layer | Tools | Mechanism |
-|-------|-------|-----------|
-| **Base** | caveman, ponytail, LG-token-saver, kevin-copilot | SKILL.md text (instant, zero deps) |
-| **Intelligence** | CGC/codegraph, codesight, Repomix | Auto-install via npx |
-| **Compression** | RTK, ContextSlimAI | Binary + CLI wrappers |
-| **Optional** | TSCG, Unified T5 Memory, LLMLingua-2, SkillOpt, GitNexus | One-click enable |
+| Layer | Capabilities | Install |
+|-------|-------------|---------|
+| **Agent Behavior** | Prose terseness, code minimalism, operational efficiency, structured output | Instant, zero config |
+| **Code Intelligence** | Smart navigation, context mapping, repo packing | Auto-install |
+| **Output Compression** | Shell filtering, CLI optimization | Auto-install |
+| **Power Tools** | Schema compression, cross-session memory, prompt optimization, skill tuning | One-click enable |
 
-Covers all 7 token types (T1-T7): exploration, shell output, agent output, prompt input, repeated knowledge, tool schemas, and instructions.
+Covers all 7 token consumption types: exploration, shell output, agent output, prompt input, repeated knowledge, tool schemas, and instructions.
 
 ## Quick Start
 
