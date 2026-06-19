@@ -2,9 +2,21 @@
 name = "token-saver-meta"
 version = "0.1.0"
 description = "Token Saving for the Masses — zero-config token-saving toolkit"
+readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "Apache-2.0"}
 dependencies = []
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Operating System :: OS Independent",
+]
 
 [project.optional-dependencies]
 dev = ["pytest"]
@@ -31,3 +43,6 @@ target-version = "py310"
 dev = [
     "pytest>=9.1.0",
 ]
+
+[tool.uv.workspace]
+members = ["tscg-py", "token-saver-mem", "contextslim-py"]
