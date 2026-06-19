@@ -161,10 +161,10 @@ Frictionless adoption. Only bundle tools that need nothing or just Node.js — t
 All MCP servers invoked via npx. No Python, no Rust, no Bun. SKILL.md files copied directly. All tools run from a single package.json.
 
 ### Installation Architecture
-`npx create-token-saver` → npm-based installer. Generates MCP config for all tools. Copies SKILL.md files. One `npm install` or `npx` per tool. Works everywhere Node.js works.
+`npx token-saver-meta` → npm-based installer. Generates MCP config for all tools. Copies SKILL.md files. One `npm install` or `npx` per tool. Works everywhere Node.js works.
 
 ### User Experience
-`npx create-token-saver` → "7 of 8 tools installed (ContextSlimAI skipped: Node ≥18 required)" → simple status report.
+`npx token-saver-meta` → "7 of 8 tools installed (ContextSlimAI skipped: Node ≥18 required)" → simple status report.
 
 ### Tradeoffs
 - **Sacrifices:** Missing RTK (best T2 tool, 60-90%, Rust), missing Python gems (Loom, codex-agent-mem, Deblank, SkillOpt), weak T4/T5 coverage
@@ -449,7 +449,7 @@ D wins because it achieves 70% savings with acceptable complexity. The gap betwe
 3. **Defense-in-depth for T1 and T2** — Added Repomix to T1 stack and ContextSlimAI to T2 stack (both Node-only, zero friction). Now T1 has 4 tools (GitNexus+CGC+codesight+Repomix) and T2 has 2 tools (RTK+ContextSlimAI).
 
 ### From Option B (Node-First) — 2 elements:
-1. **`npx create-token-saver` bootstrap** — The primary install command. Copies AGENTS.md base layer + detects platform + installs MCP tools. One command, no clone, no pip. Inherits B's "Node.js everywhere" assumption.
+1. **`npx token-saver-meta` bootstrap** — The primary install command. Copies AGENTS.md base layer + detects platform + installs MCP tools. One command, no clone, no pip. Inherits B's "Node.js everywhere" assumption.
 2. **Node-only fallback mode** — When Python is missing, install all Node-based tools and skip Python tools with a clear message. Base layer always works regardless.
 
 ### From Option C (SKILL.md Only) — Already absorbed:
