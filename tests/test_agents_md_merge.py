@@ -51,10 +51,11 @@ class TestTemplate:
         assert line_count <= 250, f"Template block is {line_count} lines, must be ≤250"
 
     def test_all_4_sources_represented(self):
-        """Template references all 4 source tools in attribution comments."""
+        """Template references all 4 dimensions after deidentify rewrite."""
         content = TEMPLATE_PATH.read_text(encoding="utf-8")
-        for name in SOURCE_NAMES:
-            assert name in content, f"Source '{name}' not found in template"
+        assert "28 rules across four dimensions" in content, "Missing dimension summary line"
+        for dim in ["prose style", "code minimalism", "operational efficiency", "structured output"]:
+            assert dim in content, f"Dimension '{dim}' not found in template"
 
 
 class TestInjector:

@@ -51,7 +51,7 @@ def test_detect_platforms(
     mock_detect: MagicMock,
     tmp_path: Path,
 ):
-    """Pipeline detects known platforms from project markers."""
+    """Pipeline detects known platforms from project markers (called in Phase 2 + Phase 3)."""
     mock_detect.return_value = ["kilo", "claude-code"]
     mock_inject.return_value = {
         "kilo": {"status": "appended"},
@@ -88,7 +88,7 @@ def test_detect_platforms(
 
     assert results["platforms"]["status"] == "ok"
     assert results["platforms"]["detected"] == ["kilo", "claude-code"]
-    mock_detect.assert_called_once()
+    assert mock_detect.call_count >= 2, f"Expected >= 2 calls, got {mock_detect.call_count}"
 
 
 # ---------------------------------------------------------------------------

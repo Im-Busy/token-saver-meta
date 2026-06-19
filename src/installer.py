@@ -1,14 +1,15 @@
 """
 Token Saver Meta — Multi-platform AI agent installer.
 
-7-phase installation pipeline:
+8-phase installation pipeline:
   1. BASE LAYER      — inject AGENTS.md token-saver protocol
   2. PLATFORM DETECT — scan project for platform markers
-  3. PREREQUISITES   — check node, npm, npx, internet
-  4. CGC MCP         — npx codegraph mcp install + config gen
-  5. ONE-SHOT TOOLS  — codesight + Repomix
-  6. RTK             — binary download + hook init
-  7. SUMMARY         — terminal report with per-tool status
+  3. SKILLS COPY     — copy token-saver SKILL.md to each platform's skill directory
+  4. PREREQUISITES   — check node, npm, npx, internet
+  5. CGC MCP         — npx codegraph mcp install + config gen
+  6. ONE-SHOT TOOLS  — codesight + Repomix
+  7. RTK             — binary download + hook init
+  8. SUMMARY         — terminal report with per-tool status
 
 Per-tool failure isolation: any tool can fail without aborting the pipeline.
 Idempotent: running twice produces the same result.
@@ -38,8 +39,38 @@ def _collect_phase_result(results: dict[str, Any], phase_output: dict[str, Any])
     results.update(phase_output)
 
 
+def do_skills_copy(project_path: Path) -> dict[str, Any]:
+    """Copy token-saver SKILL.md to each detected platform's skill directory."""
+    from .config_gen import load_matrix, detect_platforms
+
+    matrix = load_matrix()
+    platforms = detect_platforms(project_path)
+    package_dir = Path(__file__).parent.parent  # repo root
+    source = package_dir / "skills" / "token-saver" / "SKILL.md"
+
+    if not source.exists():
+        return {"error": f"Source skill not found: {source}"}
+
+    content = source.read_text(encoding="utf-8")
+    results: dict[str, str] = {}
+
+    for platform_id in platforms:
+        pdef = matrix["platforms"].get(platform_id, {})
+        if not pdef.get("skills_supported"):
+            continue
+        skills_dir = pdef.get("skills_dir")
+        if not skills_dir:
+            continue
+        dest = project_path / skills_dir / "token-saver" / "SKILL.md"
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(content, encoding="utf-8")
+        results[platform_id] = "copied"
+
+    return results
+
+
 def main(project_path: Path | None = None) -> dict[str, Any]:
-    """Run the full 7-phase installation pipeline.
+    """Run the full 8-phase installation pipeline.
 
     Args:
         project_path: Path to the target project. Defaults to cwd.
@@ -69,14 +100,17 @@ def main(project_path: Path | None = None) -> dict[str, Any]:
     # --- Phase 2: Platform Detection (record) ---
     results["platforms"] = {"status": "ok", "detected": platforms}
 
-    # --- Phase 3: Prerequisites ---
+    # --- Phase 3: Skills Copy ---
+    _collect_phase_result(results, run_phase("skills_copy", do_skills_copy, project_path))
+
+    # --- Phase 4: Prerequisites ---
     from src.prerequisites import check_prerequisites
 
     _collect_phase_result(results, run_phase("prerequisites", check_prerequisites, project_path))
     pre = results.get("prerequisites", {}).get("result", {})
     results["node_only_fallback"] = pre.get("node_only_fallback", False) if isinstance(pre, dict) else False
 
-    # --- Phase 4: CGC MCP ---
+    # --- Phase 5: CGC MCP ---
     npx_ok = isinstance(pre, dict) and pre.get("npx", {}).get("status") == "ok"
     if npx_ok:
         from src.cgc_installer import install_cgc
@@ -85,17 +119,17 @@ def main(project_path: Path | None = None) -> dict[str, Any]:
     else:
         results["cgc"] = {"status": "warn", "result": {"status": "warn", "message": "npx not available"}}
 
-    # --- Phase 5: One-Shot Tools ---
+    # --- Phase 6: One-Shot Tools ---
     from src.oneshot_installer import install_one_shot_tools
 
     _collect_phase_result(results, run_phase("oneshot", install_one_shot_tools, project_path))
 
-    # --- Phase 6: RTK ---
+    # --- Phase 7: RTK ---
     from src.rtk_installer import install_rtk
 
     _collect_phase_result(results, run_phase("rtk", install_rtk, project_path, platforms))
 
-    # --- Phase 7: Summary ---
+    # --- Phase 8: Summary ---
     from src.summary import print_summary
 
     summary_dict = _build_summary(results)
