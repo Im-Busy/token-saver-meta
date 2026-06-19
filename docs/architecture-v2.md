@@ -5,6 +5,8 @@
 > **Based on:** 63 sources, 46 tools, 39 insights, 24 synergies, 4-agent research + Oracle evaluation
 > **Replaces:** `max-coexistence.md`, Phase 07 handover architecture, MEMORY.md architecture section
 
+> **⚠️ Note:** GitNexus was removed from the product after license audit (PolyForm Noncommercial 1.0.0). It appears in some historical design sections below as `GitNexus` but is NOT included in the current distribution. See [§Acknowledgments](#acknowledgments) for full attribution.
+
 ---
 
 # PART 1: SYNERGY ANALYSIS
@@ -601,11 +603,39 @@ D's base layer IS Option C plus ponytail. The philosophy of "make the foundation
 
 ## Acknowledgments
 
-This project draws techniques from several open source projects:
+### Directly Utilized
+These tools are installed via their package managers during setup. They are licensed under MIT or Apache-2.0 (all compatible with our Apache-2.0 redistribution).
 
-- **Agent behavior rules** — caveman ([JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman), MIT), ponytail ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail), MIT), LG-token-saver (MIT), kevin-copilot (MIT)
-- **Code intelligence** — CGC/codegraph ([colbymchenry/codegraph](https://github.com/colbymchenry/codegraph), MIT), codesight ([Houseofmvps/codesight](https://github.com/Houseofmvps/codesight), MIT), Repomix ([yamadashy/repomix](https://github.com/yamadashy/repomix), MIT)
-- **Output compression** — RTK ([rtk-ai/rtk](https://github.com/rtk-ai/rtk), Apache-2.0)
-- **Optional modules** — TSCG ([SKZL-AI/tscg](https://github.com/SKZL-AI/tscg), MIT), LLMLingua-2 ([microsoft/LLMLingua](https://github.com/microsoft/LLMLingua), MIT), SkillOpt ([microsoft/SkillOpt](https://github.com/microsoft/SkillOpt), MIT)
+| Tool | License | Role in token-saver-meta |
+|------|---------|---------------------------|
+| [CGC/codegraph](https://github.com/colbymchenry/codegraph) | MIT | Code graph queries via SQLite+FTS5 semantic search |
+| [codesight](https://github.com/Houseofmvps/codesight) | MIT | Pre-built project structure context maps (7x-91x compression) |
+| [Repomix](https://github.com/yamadashy/repomix) | MIT | Full repository packing into a single file (~70% compression) |
+| [RTK](https://github.com/rtk-ai/rtk) | Apache-2.0 | Shell output compression via PreToolUse hook (60-90%) |
+| [LLMLingua-2](https://github.com/microsoft/LLMLingua) | MIT | ML-based prompt token optimization (GPU auto-detect) |
+| [SkillOpt](https://github.com/microsoft/SkillOpt) | MIT | Trainable skill document optimization (300-2K token artifacts) |
 
-All are used under their respective open source licenses. GitNexus is excluded from redistribution (PolyForm Noncommercial).
+### Technique Sources
+These projects inspired the 28 token-saving rules vendored as text in our AGENTS.md injection block. No code from these projects is distributed — only the behavioral techniques are applied.
+
+| Project | License | Technique Applied |
+|---------|---------|-------------------|
+| [caveman](https://github.com/JuliusBrussee/caveman) | MIT | Prose terseness — concise language, no filler, no hedging (~75% output reduction) |
+| [ponytail](https://github.com/DietrichGebert/ponytail) | MIT | YAGNI code minimalism ladder — stdlib→native→dep→one-liner→minimal (~54% LOC, ~22% tokens) |
+| [LG-token-saver](https://github.com) | MIT | 8 operational efficiency rules — parallelism, dedup, compaction, filtering |
+| [kevin-copilot](https://github.com) | MIT | Structured output — 4 terseness modes, consistent formatting |
+
+### Rewritten from the Ground Up
+These are original Python implementations created for token-saver-meta, inspired by the concepts of the following projects. No code from the originals is used.
+
+| Our Package | Inspired By | Original License | Our License |
+|-------------|-------------|-----------------|-------------|
+| tscg | [TSCG](https://github.com/SKZL-AI/tscg) by nicholasgriffintn | MIT | Apache-2.0 |
+| contextslim | [ContextSlimAI](https://github.com) | Apache-2.0 | Apache-2.0 |
+| token-saver-mem | [codex-agent-mem](https://github.com) + [Loom](https://github.com) | Apache-2.0 + MIT | Apache-2.0 |
+
+### Excluded from Redistribution
+
+| Tool | Reason |
+|------|--------|
+| GitNexus | [PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/) — cannot redistribute in any commercial distribution. Listed here for attribution; NOT included in the product. |
