@@ -1,23 +1,33 @@
 {
-  "name": "create-token-saver",
+  "name": "token-saver-meta",
   "version": "0.1.0",
-  "description": "Zero-config token-saving toolkit for AI coding agents",
+  "description": "Token Saving for the Masses — zero-config token-saving toolkit for AI coding agents",
   "license": "Apache-2.0",
+  "author": "Joey Chiu",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Im-Busy/token-saver-meta.git"
   },
+  "homepage": "https://github.com/Im-Busy/token-saver-meta#readme",
+  "bugs": {
+    "url": "https://github.com/Im-Busy/token-saver-meta/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "keywords": [
     "token-saver",
-    "llm",
     "token-optimization",
     "context-compression",
+    "llm",
     "ai-agent",
     "cli",
-    "npx"
+    "npx",
+    "token-saver-meta",
+    "uvx"
   ],
   "bin": {
-    "create-token-saver": "./cli.js"
+    "token-saver-meta": "./cli.js"
   },
   "files": [
     "cli.js",

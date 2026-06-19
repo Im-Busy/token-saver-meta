@@ -4,7 +4,7 @@
 
 | Channel | Package | Command | URL |
 |---------|---------|---------|-----|
-| npm | `create-token-saver` | `npx create-token-saver` | `npmjs.com/package/create-token-saver` |
+| npm | `token-saver-meta` | `npx token-saver-meta` | `npmjs.com/package/token-saver-meta` |
 | PyPI | `token-saver-meta` | `pip install token-saver-meta` | `pypi.org/project/token-saver-meta` |
 
 The PyPI package bundles 3 sub-packages as vendored code: `tscg`, `token-saver-mem`, `contextslim`. These are NOT independently published — they ship inside `token-saver-meta`.
@@ -14,7 +14,7 @@ The PyPI package bundles 3 sub-packages as vendored code: `tscg`, `token-saver-m
 | Step | Package | Channel | Command |
 |------|---------|---------|---------|
 | 1 | token-saver-meta | PyPI | `uv build && uv publish` |
-| 2 | create-token-saver | npm | `npm publish --access public` |
+| 2 | token-saver-meta | npm | `npm publish --access public` |
 
 Steps 1 and 2 can run in parallel.
 

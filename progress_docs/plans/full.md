@@ -111,7 +111,7 @@ enhancement_tracks:
 
 | Priority | Task | Description |
 |----------|------|-------------|
-| P0 | `npx create-token-saver` | npm starter (follow create-react-app pattern) |
+| P0 | `npx token-saver-meta` | npm starter |
 | P0 | `uvx token-saver-meta setup` | Python distribution (follow combo's uvx pattern) |
 | P1 | PyPI package | `pip install token-saver-meta` |
 | P1 | GitHub repo | Public with README, docs, getting started guide |
@@ -154,4 +154,4 @@ enhancement_tracks:
 2. Extend matrix.json with new tool entries (RTK, codesight, Repomix, ContextSlimAI)
 3. Build unified installer that auto-detects and sets up all 10 core tools
 4. Write AGENTS.md injection with full token-saving protocol
-5. Create `npx create-token-saver` entry point
+5. Create `npx token-saver-meta` entry point

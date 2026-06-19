@@ -11,10 +11,10 @@ curl -fsSL https://raw.githubusercontent.com/Im-Busy/token-saver-meta/main/insta
 Or install manually:
 ```bash
 # npm
-npx create-token-saver@latest
+npx token-saver-meta@latest
 
 # Python / uv
-uvx token-saver-meta setup
+uvx token-saver-meta
 ```
 
 ## Per-Platform Files

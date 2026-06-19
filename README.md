@@ -21,10 +21,10 @@ Covers all 7 token types (T1-T7): exploration, shell output, agent output, promp
 
 ```bash
 # npm
-npx create-token-saver
+npx token-saver-meta
 
 # Python
-uvx token-saver-meta setup
+uvx token-saver-meta
 ```
 
 Full architecture: [docs/architecture-v2.md](docs/architecture-v2.md)

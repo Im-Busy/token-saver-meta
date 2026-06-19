@@ -17,7 +17,7 @@ Package token-saver-meta for all major distribution channels: npm (npx), Python 
 
 | Priority | # | Task | Description | LOC |
 |----------|---|------|-------------|-----|
-| **P0** | P09-1 | `npx create-token-saver` | npm starter (follow create-react-app pattern) | 120 |
+| **P0** | P09-1 | `npx token-saver-meta` | npm starter | 120 |
 | **P0** | P09-2 | `uvx token-saver-meta setup` | Python distribution (follow combo's uvx pattern) | 100 |
 | **P1** | P09-3 | PyPI package | `pip install token-saver-meta` | 60 |
 | **P1** | P09-4 | GitHub repo | Public with README, docs, getting started guide | 80 |

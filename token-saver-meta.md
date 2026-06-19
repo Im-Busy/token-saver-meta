@@ -670,7 +670,7 @@ To calculate savings, the dashboard needs to know:
 | **VS Code Extension** | VS Code / Cursor users | Medium (3 days) | Status bar indicator + one-click setup. Huge user base. |
 | **GitHub Codespaces** | GitHub users | Low (1 hour) | Pre-configured devcontainer. Click "Open in Codespaces" → ready. |
 | **Homebrew / Chocolatey / Scoop** | Mac/Windows users | Low (2 hours) | `brew install token-saver-meta` → done. |
-| **`npx create-token-saver`** | JS developers | Medium (2 days) | Familiar `create-*` pattern. Scaffolds into any project. |
+| **`npx token-saver-meta`** | JS developers | Medium (2 days) | Familiar npx pattern. Scaffolds into any project. |
 | **Standalone Binary** (PyInstaller) | Zero-dependency | Medium (1 day) | Single .exe file. No Python, Node, or uv needed. Bundles everything. |
 | **Web UI** (localhost dashboard) | Browser-native | Medium (3 days) | `token-saver open` → opens browser dashboard. Status, setup, savings. |
 

@@ -80,7 +80,7 @@ The project builds on the existing **gitnexus_CGC_combo** project (which already
 | 7 | **LG-token-saver** | T1+T2+T3 | SKILL.md only (zero deps) | Copy SKILL.md from `useful-repos/LG-token-saver/SKILL.md`. |
 | 8 | **ContextSlimAI** | T2 | `npx contextslim` | Run `contextslim init` for AI rules + ignore files generation. |
 | 9 | **kevin-copilot** | T3 | Instruction files | Copy instruction files from `useful-repos/kevin-copilot/`. |
-| 10 | **Token Saver Meta** | — | `npx create-token-saver` or `uvx` | **THIS IS WHAT YOU BUILD.** Unified installer + AGENTS.md injection. |
+| 10 | **Token Saver Meta** | — | `npx token-saver-meta` or `uvx` | **THIS IS WHAT YOU BUILD.** Unified installer + AGENTS.md injection. |
 
 ### Optional Modules (8 tools — one-click enable)
 
@@ -199,12 +199,12 @@ The project builds on the existing **gitnexus_CGC_combo** project (which already
   requires = ["hatchling"]
   build-backend = "hatchling.build"
   ```
-- **File:** `package.json` (new, for `npx create-token-saver`)
+- **File:** `package.json` (new, for `npx token-saver-meta`)
   ```json
   {
-    "name": "create-token-saver",
+    "name": "token-saver-meta",
     "version": "0.1.0",
-    "bin": { "create-token-saver": "./cli.js" }
+    "bin": { "token-saver-meta": "./cli.js" }
   }
   ```
 - **File:** `cli.js` (new — bridge to Python, like combo's cli.js)

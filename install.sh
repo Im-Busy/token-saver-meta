@@ -18,9 +18,9 @@ detect_installer() {
     if need_cmd node >/dev/null 2>&1 && need_cmd npx >/dev/null 2>&1; then
         INSTALLER="npm"
         if [ -n "$VERSION" ]; then
-            RUN_CMD="npx create-token-saver@${VERSION}"
+            RUN_CMD="npx token-saver-meta@${VERSION}"
         else
-            RUN_CMD="npx create-token-saver@latest"
+            RUN_CMD="npx token-saver-meta@latest"
         fi
         return 0
     fi
@@ -28,9 +28,9 @@ detect_installer() {
     if need_cmd uv >/dev/null 2>&1 || need_cmd python3 >/dev/null 2>&1; then
         INSTALLER="uv"
         if [ -n "$VERSION" ]; then
-            RUN_CMD="uvx token-saver-meta==${VERSION} setup"
+            RUN_CMD="uvx token-saver-meta==${VERSION}"
         else
-            RUN_CMD="uvx token-saver-meta setup"
+            RUN_CMD="uvx token-saver-meta"
         fi
         return 0
     fi
