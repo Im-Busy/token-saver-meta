@@ -41,3 +41,6 @@ whitelist.txt
 .npmignore
 .gitignore
 
+# Platform-specific distribution (not for npm)
+.claude-plugin
+distribution

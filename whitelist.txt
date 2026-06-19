@@ -4,6 +4,7 @@
 # === Source Code ===
 src/
 cli.js
+install.sh
 
 # === Tests ===
 tests/
@@ -13,6 +14,7 @@ docs/
 AGENTS.md
 BESTS.md
 README.md
+CLAUDE.md
 
 # === Project Config ===
 package.json
@@ -37,3 +39,9 @@ contextslim-py/
 
 # === Sync Infrastructure ===
 whitelist.txt
+
+# === Claude Code Plugin ===
+.claude-plugin/
+
+# === Distribution ===
+distribution/
