@@ -23,7 +23,7 @@ Steps 1 and 2 can run in parallel.
 ### PyPI Setup
 
 1. Go to `pypi.org/manage/project/token-saver-meta/settings/publishing`
-2. Add publisher: GitHub → owner `Im-Busy`, repo `token-saver-meta-private`, workflow `publish-pypi.yml`
+2. Add publisher: GitHub → owner `Im-Busy`, repo that runs the workflow (source repository), workflow `publish-pypi.yml`
 3. Environment: leave blank (default)
 
 ### npm Setup
@@ -44,7 +44,7 @@ npm publish --access public
 
 ## Dual-Repo Notes
 
-- CI/CD workflows (`.github/workflows/`) live on **private** repo (`token-saver-meta-private`, `master` branch)
-- The public mirror (`token-saver-meta`, `public` branch) receives workflows via sync but won't activate without OIDC config
-- Secrets (`NPM_TOKEN`, OIDC trust) are configured on the **private** repo only
-- Publishing always runs from the private repo's `master` branch
+- CI/CD workflows (`.github/workflows/`) live on the source repository (`master` branch)
+- The public mirror (`token-saver-meta`, `public` branch) receives curated files only
+- Secrets (`NPM_TOKEN`, OIDC trust) are configured on the source repository only
+- Publishing always runs from the source repository's `master` branch
