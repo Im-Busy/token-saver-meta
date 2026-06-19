@@ -596,3 +596,16 @@ D's base layer IS Option C plus ponytail. The philosophy of "make the foundation
 | Paperclip #373 | Lazy spawning |
 | Kilo #5848 | Built-in CLI compression |
 | Oracle evaluation (2026-06-18) | Architecture scoring, Option D recommendation, merged elements |
+
+---
+
+## Acknowledgments
+
+This project draws techniques from several open source projects:
+
+- **Agent behavior rules** — caveman ([JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman), MIT), ponytail ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail), MIT), LG-token-saver (MIT), kevin-copilot (MIT)
+- **Code intelligence** — CGC/codegraph ([colbymchenry/codegraph](https://github.com/colbymchenry/codegraph), MIT), codesight ([Houseofmvps/codesight](https://github.com/Houseofmvps/codesight), MIT), Repomix ([yamadashy/repomix](https://github.com/yamadashy/repomix), MIT)
+- **Output compression** — RTK ([rtk-ai/rtk](https://github.com/rtk-ai/rtk), Apache-2.0)
+- **Optional modules** — TSCG ([SKZL-AI/tscg](https://github.com/SKZL-AI/tscg), MIT), LLMLingua-2 ([microsoft/LLMLingua](https://github.com/microsoft/LLMLingua), MIT), SkillOpt ([microsoft/SkillOpt](https://github.com/microsoft/SkillOpt), MIT)
+
+All are used under their respective open source licenses. GitNexus is excluded from redistribution (PolyForm Noncommercial).
