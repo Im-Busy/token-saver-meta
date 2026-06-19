@@ -14,6 +14,19 @@ dependencies = [
     "click>=8.0",
     "psutil>=5.9",
 ]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+]
+
+[project.urls]
+Repository = "https://github.com/Im-Busy/token-saver-meta"
 
 [project.optional-dependencies]
 db = ["pymysql>=1.0", "psycopg2-binary>=2.9"]
