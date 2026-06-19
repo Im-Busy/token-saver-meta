@@ -1,0 +1,39 @@
+# Whitelist for public repo sync
+# Lines starting with # are ignored. Directories must end with /.
+
+# === Source Code ===
+src/
+cli.js
+
+# === Tests ===
+tests/
+
+# === Documentation ===
+docs/
+AGENTS.md
+BESTS.md
+README.md
+
+# === Project Config ===
+package.json
+pyproject.toml
+uv.lock
+.gitignore
+.gitattributes
+
+# === Assets ===
+templates/
+skills/
+platforms/
+dashboard/
+
+# === License ===
+LICENSE
+
+# === Sub-Projects ===
+tscg-py/
+token-saver-mem/
+contextslim-py/
+
+# === Sync Infrastructure ===
+whitelist.txt
