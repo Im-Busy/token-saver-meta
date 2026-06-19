@@ -1,0 +1,43 @@
+# Private development files
+MEMORY.md
+BESTS.md
+kilo.json
+opencode.jsonc
+token-saver-meta.md
+
+# Dev directories
+tests
+docs
+.venv
+.pytest_cache
+__pycache__
+*.pyc
+*.pyo
+
+# Build artifacts
+dist
+*.egg-info
+*.egg
+node_modules
+
+# Tool output
+CODESIGHT.md
+repomix-output.*
+.repomixignore
+.bak-*
+
+# Scaffold / plans
+progress_docs
+.kilo
+.omo
+.codegraph
+.github
+
+# Config / lock files
+uv.lock
+*.lock
+.gitattributes
+whitelist.txt
+.npmignore
+.gitignore
+
