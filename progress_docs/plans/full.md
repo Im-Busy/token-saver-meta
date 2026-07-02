@@ -2,7 +2,7 @@
 project: Token Saver Meta
 last_updated: 2026-06-13
 phases_total: 10
-phases_complete: 4
+phases_complete: 8
 enhancement_tracks:
   - research
   - architecture
@@ -22,9 +22,9 @@ enhancement_tracks:
 | 04 | Research & Discovery (Batch 2 — 36 sources) | ✅ Complete | 28 repos, 8 discussions, tier-1 finds |
 | 05 | Insight Extraction & Synthesis | ✅ Complete | Insight registry (22), BESTS leaderboard (44) |
 | 06 | Project Scaffolding & Infrastructure | ✅ Complete | AGENTS.md rewrite, progress_docs, docs/ |
-| 07 | Core Bundle Implementation | ⏳ Pending | 10 core tools installer |
-| 08 | Optional Module Integration | ⏳ Pending | 8 optional one-click modules |
-| 09 | Distribution & Packaging | ⏳ Pending | npx + uvx + PyPI |
+| 07 | Core Bundle Implementation | ✅ Complete | 10 core tools installer |
+| 08 | Optional Module Integration | ✅ Complete | 8 optional one-click modules |
+| 09 | Distribution & Packaging | 🔄 In Progress | npx + uvx + PyPI |
 | 10 | Testing & Verification | ⏳ Pending | Benchmark suite, integration tests |
 
 ---
@@ -72,7 +72,9 @@ enhancement_tracks:
 
 ---
 
-## Phase 07: Core Bundle Implementation ⏳ PENDING
+## Phase 07: Core Bundle Implementation ✅ Complete
+
+> Completed 2026-06-19: AGENTS.md injection block merged, installer pipeline operational, CGC + codesight + RTK + ContextSlim AI installers functional.
 
 ### Tasks
 
@@ -92,7 +94,9 @@ enhancement_tracks:
 
 ---
 
-## Phase 08: Optional Module Integration ⏳ PENDING
+## Phase 08: Optional Module Integration ✅ Complete
+
+> Completed 2026-06-19: TSCG Python rewrite, Unified T5 Memory (332 tests), ContextSlimAI rewrite (473 tests).
 
 | Priority | Task | Description |
 |----------|------|-------------|
@@ -107,7 +111,9 @@ enhancement_tracks:
 
 ---
 
-## Phase 09: Distribution & Packaging ⏳ PENDING
+## Phase 09: Distribution & Packaging 🔄 In Progress
+
+> npm v0.1.1 published, PyPI v0.1.0 published, dual-remote configured. Phase 09 task list still in progress.
 
 | Priority | Task | Description |
 |----------|------|-------------|
