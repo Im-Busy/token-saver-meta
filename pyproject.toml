@@ -1,6 +1,6 @@
 [project]
 name = "token-saver-meta"
-version = "0.1.1"
+version = "0.1.2"
 description = "Token Saving for the Masses — zero-config token-saving toolkit"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -58,6 +58,7 @@ packages = ["src/"]
 "tscg-py/src/tscg" = "tscg"
 "token-saver-mem/src/token_saver_mem" = "token_saver_mem"
 "contextslim-py/src/contextslim" = "contextslim"
+"platforms/matrix.json" = "platforms/matrix.json"
 
 [tool.ruff]
 line-length = 120
@@ -66,4 +67,5 @@ target-version = "py310"
 [dependency-groups]
 dev = [
     "pytest>=9.1.0",
+    "tiktoken>=0.7.0",
 ]

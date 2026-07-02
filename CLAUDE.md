@@ -55,3 +55,11 @@
 27. **Preserve full clarity for:** security warnings, irreversible actions, multi-step sequences where fragments risk misread, anything explicitly requested with detail.
 28. **Always verbatim:** file paths, exact commands, exact error messages, code symbols, API names, commit-type keywords (feat/fix/docs/test/chore), input validation at trust boundaries, error handling that prevents data loss.
 <!-- TOKEN_SAVER_END -->
+
+<!-- cbm:start -->
+## CBM — Codebase Memory
+
+CBM integration pending — see `templates/cbm_agents_md_block.md`.
+
+Generated skill references preserved below for platform compatibility:
+<!-- cbm:end -->

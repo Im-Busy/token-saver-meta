@@ -16,6 +16,11 @@ repomix-output.*
 .codegraph/
 # Cloned reference repos (never track)
 useful-repos/
+# Auto-generated agent configs
+.claude/skills/generated/
+.claude/skills/gitnexus/
+.opencode/skills/
+opencode.json
 # Sub-project coverage
 **/__pycache__/
 **/*.pyc

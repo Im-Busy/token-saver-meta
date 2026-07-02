@@ -23,18 +23,23 @@ AI coding agents spend **40–60% of their token budget** reading files and proc
 Hybrid across 4 layers:
 
 ```mermaid
+---
+config:
+  theme: neutral
+  htmlLabels: false
+---
 graph TB
-    subgraph LAYER4["Layer 4 — Power Tools • One-click enable"]
-        L4["Schema compression · Cross-session memory<br/>Prompt optimization · Skill tuning<br/><b>~62% savings on tool schemas</b>"]
+    subgraph LAYER4 [Layer 4 — Power Tools • One-click enable]
+        L4["`Schema compression · Cross-session memory\nPrompt optimization · Skill tuning\n<b>~62% savings on tool schemas</b>`"]
     end
-    subgraph LAYER3["Layer 3 — Output Compression • Auto-install"]
-        L3["Shell filtering · CLI optimization<br/><b>~70% savings on shell output</b>"]
+    subgraph LAYER3 [Layer 3 — Output Compression • Auto-install]
+        L3["`Shell filtering · CLI optimization\n<b>~70% savings on shell output</b>`"]
     end
-    subgraph LAYER2["Layer 2 — Code Intelligence • Auto-install"]
-        L2["Code graph queries · Context mapping<br/>Repo packing<br/><b>~85% savings on file exploration</b>"]
+    subgraph LAYER2 [Layer 2 — Code Intelligence • Auto-install]
+        L2["`Code graph queries · Context mapping\nRepo packing\n<b>~85% savings on file exploration</b>`"]
     end
-    subgraph LAYER1["Layer 1 — Agent Behavior • Instant, zero config"]
-        L1["Prose terseness · Code minimalism<br/>Operational efficiency · Structured output<br/><b>~40% savings on agent output</b>"]
+    subgraph LAYER1 [Layer 1 — Agent Behavior • Instant, zero config]
+        L1["`Prose terseness · Code minimalism\nOperational efficiency · Structured output\n<b>~40% savings on agent output</b>`"]
     end
     L1 --> L2 --> L3 --> L4
 

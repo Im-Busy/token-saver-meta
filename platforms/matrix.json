@@ -1,5 +1,5 @@
 {
-  "$schema": "https://gitnexus-cgc-combo.dev/platform-matrix.schema.json",
+  "$schema": "https://cbm-cgc-combo.dev/platform-matrix.schema.json",
   "version": "2.0.0",
   "description": "Token Saver Meta — platform matrix for 10 core token-saving tools across 18 AI agent platforms. Maps each platform to its MCP config format, file paths, and capabilities.",
   "mcp_families": {
@@ -96,7 +96,7 @@
     "continue": {
       "name": "Continue.dev",
       "mcp_family": "mcpServers",
-      "mcp_file": ".continue/mcpServers/gitnexus-cgc.json",
+      "mcp_file": ".continue/mcpServers/cbm-cgc.json",
       "instructions_files": [".continue/rules/combo.md", "AGENTS.md"],
       "skills_dir": null,
       "skills_supported": false,
@@ -255,24 +255,24 @@
     }
   },
   "mcp_servers": {
-    "gitnexus_server": {
-      "description": "GitNexus — graph-based code intelligence and impact analysis (T1)",
+    "cbm_server": {
+      "description": "CBM — codebase memory with graph-based code intelligence and impact analysis (T1)",
       "failure_mode": "warn",
       "required_binaries": ["node"],
-      "optional": true,
-      "note": "PolyForm Noncommercial license — cannot bundle in commercial distributions. Moved to Optional module.",
+      "optional": false,
+      "note": "MIT license. codebase-memory-mcp, 24k stars, pure C, 158 languages.",
       "mcpServers_format": {
         "command": "npx",
-        "args": ["-y", "gitnexus@latest", "mcp"]
+        "args": ["-y", "cbm@latest", "mcp"]
       },
       "mcp_format": {
         "type": "local",
-        "command": ["npx", "-y", "gitnexus@latest", "mcp"]
+        "command": ["npx", "-y", "cbm@latest", "mcp"]
       },
       "servers_format": {
         "type": "stdio",
         "command": "npx",
-        "args": ["-y", "gitnexus@latest", "mcp"]
+        "args": ["-y", "cbm@latest", "mcp"]
       }
     },
     "codegraphcontext_server": {
@@ -359,7 +359,7 @@
   "token_saver_meta": {
     "version": "0.1.0",
     "core_bundle_tools": [
-      "gitnexus",
+      "cbm",
       "codegraphcontext",
       "rtk",
       "codesight",

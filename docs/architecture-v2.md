@@ -5,7 +5,7 @@
 > **Based on:** 63 sources, 46 tools, 39 insights, 24 synergies, 4-agent research + Oracle evaluation
 > **Replaces:** `max-coexistence.md`, Phase 07 handover architecture, MEMORY.md architecture section
 
-> **⚠️ Note:** GitNexus was removed from the product after license audit (PolyForm Noncommercial 1.0.0). It appears in some historical design sections below as `GitNexus` but is NOT included in the current distribution. See [§Acknowledgments](#acknowledgments) for full attribution.
+> **⚠️ Note:** GitNexus references have been replaced by CBM. The code intelligence layer now uses CBM (codebase-memory-mcp) — MIT license, pure C, 158 languages. Historical decision log entries and Acknowledgments retain GitNexus for attribution.
 
 ---
 
@@ -22,13 +22,13 @@ Token Saver Meta's power comes from the **independent compounding** of tools acr
 | Tool | Mechanism | Savings | When Active |
 |------|-----------|:-------:|-------------|
 | **codesight** | Static pre-compiled context map | 7x-91x | First session — read CODESIGHT.md once |
-| **GitNexus** | Impact analysis graph (MCP) | ~90% | "What breaks if I change X?" |
+| **CBM** (codebase-memory-mcp) | Impact analysis graph (MCP, pure C) | ~90% | "What breaks if I change X?" |
 | **CGC** | SQLite+FTS5 graph queries (MCP, npx) | ~85% | "How is X structured?" |
 | **Repomix** | Repo packing to single file | ~70% | Bulk load for new sessions |
 | **Loom** (optional) | Persistent symbol cache (SQLite) | 51x-1507x | Sessions 2+ — compound effect |
 | **codex-agent-mem** (optional) | Continuity packs with hash caching | ~95% | Repeated context across sessions |
 
-**Synergy chain:** codesight (breadth map) → Loom/GitNexus (depth queries) → codex-agent-mem (cross-session memory). Each level compounds: codesight eliminates 90% of initial reads → agent has context budget left → Loom caches remaining queries → session 2 reads zero files.
+**Synergy chain:** codesight (breadth map) → Loom / CBM graph engine (depth queries) → codex-agent-mem (cross-session memory). Each level compounds: codesight eliminates 90% of initial reads → agent has context budget left → Loom caches remaining queries → session 2 reads zero files.
 
 **Gap:** Without Loom/codex-agent-mem, sessions 2+ re-read the same files. These are optional modules in v1.
 
@@ -70,9 +70,9 @@ What's sent to the LLM API. Currently single-coverage in core — needs optional
 | Tool | Mechanism | Savings | Blockers |
 |------|-----------|:-------:|----------|
 | **LLMLingua-2** (optional) | ML-based perplexity token removal | 5-20x | Needs GPU (auto-detect) |
-| **Deblank** (optional) | Bidirectional formatting strip | ~34% C, ~9% Python | REST API wrapper needed |
+| **Deblank** (defer v2) | Bidirectional formatting strip | ~34% C, ~9% Python | REST API wrapper needed |
 | **racs** (defer v2) | Provider cache-breakpoint planning | 88% cache hits | Library, needs integration |
-| **toon** (optional) | Compact data serialization | ~40% | Drop-in JSON→TOON converter |
+| **toon** (defer v2) | Compact data serialization | ~40% | Drop-in JSON→TOON converter |
 
 **Current weakness:** T4 has zero core tools. All T4 tools are optional or deferred. This is the #1 gap in v1.
 
@@ -116,7 +116,7 @@ AGENTS.md, rules, skills loaded every turn. This is the cheapest win — SKILL.m
 Tools don't just save within their type — they amplify each other across types:
 
 - **T1 → T2:** codesight eliminates 90% of file reads → agent has more context budget → T2 compression (RTK) matters more
-- **T1 → T5:** GitNexus graph is cached across sessions via Loom → "what breaks?" costs zero tokens on session 2+
+- **T1 → T5:** CBM graph is cached across sessions via Loom → "what breaks?" costs zero tokens on session 2+
 - **T3 → T7:** SKILL.md instructions (T7) produce terser output (T3) → instructions pay for themselves in output savings
 - **T1 → T6:** Fewer MCP tool calls (T1 tools are more efficient) → fewer schema tokens burned per request (T6)
 
@@ -132,7 +132,7 @@ Tools don't just save within their type — they amplify each other across types
 Maximum coverage. Install every compatible tool from Tiers S, A, and B. The user gets everything.
 
 ### Bundle Composition
-**Core (auto-install, 10 tools):** GitNexus, CGC, RTK, codesight, Repomix, caveman, LG-token-saver, kevin-copilot, ContextSlimAI, ponytail
+**Core (auto-install, 10 tools):** CBM, CGC, RTK, codesight, Repomix, caveman, LG-token-saver, kevin-copilot, ContextSlimAI, ponytail
 **Optional (one-click, 8 tools):** TSCG, lean-ctx MCP, LLMLingua-2 (GPU auto-detect), codex-agent-mem, Loom, Deblank, toon, SkillOpt
 
 ### Integration Architecture
@@ -156,7 +156,7 @@ Python-based unified installer extending `gitnexus_CGC_combo/src/config_gen.py`.
 Frictionless adoption. Only bundle tools that need nothing or just Node.js — the most ubiquitous runtime.
 
 ### Bundle Composition
-**Core (8 tools):** GitNexus (npx), codesight (npx), Repomix (npx), TSCG (npx), ContextSlimAI (npx), caveman (SKILL.md), LG-token-saver (SKILL.md), kevin-copilot (npx)
+**Core (8 tools):** CBM (npx), codesight (npx), Repomix (npx), TSCG (npx), ContextSlimAI (npx), caveman (SKILL.md), LG-token-saver (SKILL.md), kevin-copilot (npx)
 **Optional (2 tools):** ponytail (SKILL.md), toon (npm)
 
 ### Integration Architecture
@@ -211,7 +211,7 @@ Gradated adoption. Base layer works instantly everywhere (SKILL.md files). Advan
 - ponytail — YAGNI code minimalism (~54% LOC, ~22% tokens)
 
 **Code Intelligence Layer — auto-install, detect platform (3 tools):**
-- GitNexus — impact analysis graph (MCP, npx)
+- CBM — impact analysis graph (MCP, sidecar)
 - codesight — static context map (one-shot, npx)
 - Repomix — repo packing (one-shot, npx) *(added for T1 defense-in-depth per Oracle recommendation)*
 
@@ -229,7 +229,7 @@ Gradated adoption. Base layer works instantly everywhere (SKILL.md files). Advan
 
 **Deferred to v2 (license-restricted or heavy):**
 - jcodemunch-mcp (dual-use license) | sdl-mcp (source-available)
-- opentoken (Bun runtime) | omni (evaluate vs RTK) | tokensave (evaluate vs GitNexus)
+- opentoken (Bun runtime) | omni (evaluate vs RTK) | tokensave (evaluate vs CBM)
 - trace-mcp (complex) | Deblank (needs REST API wrapper) | toon (serialization only)
 - racs (needs API pipeline integration) | lowfat (complements RTK)
 
@@ -249,7 +249,7 @@ Gradated adoption. Base layer works instantly everywhere (SKILL.md files). Advan
 ├─────────────────────────────────────────────────────────────┤
 │  INTELLIGENCE LAYER (MCP servers + one-shot tools)          │
 │  ┌───────────────────────────────────────────────────────┐ │
-│  │  GitNexus MCP ← npx gitnexus mcp                       │ │
+│  │  CBM MCP ← cbm_sidecar/ MCP server                    │ │
 │  │  CGC MCP ← npx codegraph mcp                              │ │
 │  │  codesight (one-shot) ← npx codesight                   │ │
 │  │  Repomix (one-shot) ← npx repomix                       │ │
@@ -297,7 +297,7 @@ npx token-saver-meta init
     │   └── Determine available tools based on runtimes
     │
     ├── [Phase 3: MCP Tools — 30-60 seconds]
-    │   ├── GitNexus (npx) → generate MCP config entry
+    │   ├── CBM (download binary) → configure MCP sidecar
     │   ├── CGC (npx) → generate MCP config entry
     │   ├── codesight (npx, run once) → generate CODESIGHT.md
     │   ├── Repomix (npx, run once) → generate repomix-output.txt
@@ -306,7 +306,7 @@ npx token-saver-meta init
     │   Each tool: independent install, failure = warn + continue
     │
     ├── [Phase 4: Index — 30-60 seconds]
-    │   ├── GitNexus analyze (index codebase)
+    │   ├── CBM index (index codebase)
     │   ├── CGC index
     │   └── codesight generate (if not already)
     │
@@ -318,7 +318,7 @@ npx token-saver-meta init
 
 **Node-only fallback** (merged from Option B):
 When the installer detects NO Python and NO Bun:
-- Install ALL Node-based tools (GitNexus, codesight, Repomix, TSCG, ContextSlimAI)
+- Install ALL available tools (CBM, codesight, Repomix, TSCG, ContextSlimAI)
 - Skip CGC (needs Python)
 - Skip Python optional modules
 - Report: "CGC skipped (Python not found). Install Python for: CGC, Loom, codex-agent-mem, Deblank, SkillOpt."
@@ -373,7 +373,7 @@ When the installer detects NO Python and NO Bun:
 - **A (10):** Full coverage. RTK+TSCG+LLMLingua+Loom+codex-agent-mem = all 7 types with 2+ tools. Estimated ~75-80% total savings.
 - **B (4):** Lacks T4 (no LLMLingua), weak T5 (no Python tools), missing best T2 (RTK, Rust). Only T1+T3+T7 are strong. ~35-40%.
 - **C (2):** Only T3+T7. No T1 (heaviest type at 40-200K), no T2, no T4, no T5, no T6. ~20-25%.
-- **D (8):** Strong T1 (GitNexus+CGC+codesight+Repomix), strong T2 (RTK+ContextSlimAI), strong T3+T7 (4 SKILL.md tools). Missing T4 core, T5 needs optional, T6 needs optional. ~65-70% with base+MCP, ~72% with optional modules.
+- **D (8):** Strong T1 (CBM+CGC+codesight+Repomix), strong T2 (RTK+ContextSlimAI), strong T3+T7 (4 SKILL.md tools). Missing T4 core, T5 needs optional, T6 needs optional. ~65-70% with base+MCP, ~72% with optional modules.
 
 ### 2. Ease of Installation
 - **A (2):** 4 ecosystem dependencies (Node+Python+Rust+Bun). Must orchestrate npm+pip+cargo+brew. Complex failure modes. 3-5 minute install.
@@ -409,7 +409,7 @@ When the installer detects NO Python and NO Bun:
 - **A (4):** Many failure points. One broken Rust build blocks RTK. One broken Python env blocks 6 tools. Complex rollback.
 - **B (8):** Single ecosystem. npm failures are well-understood. Clean uninstall.
 - **C (10):** Cannot break. It's a text file.
-- **D (9):** Base layer: cannot break. MCP layer: per-tool failure isolation. If GitNexus fails, CGC and codesight still work.
+- **D (9):** Base layer: cannot break. MCP layer: per-tool failure isolation. If CBM fails, CGC and codesight still work.
 
 ### 8. User Trust
 - **A (6):** 18 tools downloading binaries from multiple sources. Opaque. Hard to verify what's running.
@@ -448,7 +448,7 @@ D wins because it achieves 70% savings with acceptable complexity. The gap betwe
 ### From Option A (Maximal) — 3 elements:
 1. **Sophisticated platform detection logic** — Inherited from gitnexus_CGC_combo's `config_gen.py` and `matrix.json`. Filesystem marker scanning, multi-MCP-family format translation, merge-into-existing (never overwrite). Simplified for 2 ecosystems instead of 4.
 2. **Per-tool failure isolation** — Each tool installs independently. One failure = warn + continue. Final report shows ✅/❌ per tool. Never "all or nothing."
-3. **Defense-in-depth for T1 and T2** — Added Repomix to T1 stack and ContextSlimAI to T2 stack (both Node-only, zero friction). Now T1 has 4 tools (GitNexus+CGC+codesight+Repomix) and T2 has 2 tools (RTK+ContextSlimAI).
+3. **Defense-in-depth for T1 and T2** — Added Repomix to T1 stack and ContextSlimAI to T2 stack (both Node-only, zero friction). Now T1 has 4 tools (CBM+CGC+codesight+Repomix) and T2 has 2 tools (RTK+ContextSlimAI).
 
 ### From Option B (Node-First) — 2 elements:
 1. **`npx token-saver-meta` bootstrap** — The primary install command. Copies AGENTS.md base layer + detects platform + installs MCP tools. One command, no clone, no pip. Inherits B's "Node.js everywhere" assumption.
@@ -476,7 +476,7 @@ D's base layer IS Option C plus ponytail. The philosophy of "make the foundation
 
 | Token Type | Core Tools | Optional | Status |
 |:----------:|-----------|----------|:------:|
-| **T1 — Exploration** | GitNexus, CGC, codesight, Repomix | Loom, codex-agent-mem | ✅ 4 core + 2 optional |
+| **T1 — Exploration** | CBM, CGC, codesight, Repomix | Loom, codex-agent-mem | ✅ 4 core + 2 optional |
 | **T2 — Shell Output** | RTK, ContextSlimAI | — | ✅ 2 core |
 | **T3 — Agent Output** | caveman, ponytail, LG-token-saver, kevin-copilot | — | ✅ 4 core |
 | **T4 — Prompt Input** | — | LLMLingua-2 | ⚠️ 0 core, 1 optional |
@@ -499,7 +499,7 @@ D's base layer IS Option C plus ponytail. The philosophy of "make the foundation
 | 1 | **AGENTS.md tiered structure** — Merge 4 SKILL.md tools into one tiered block. Core rules (~3K tokens), on-demand sections. Marker-delimited injection. | `src/agents_md_injector.py`, `templates/agents_md_block.md` | Manual test: copy block, agent outputs are terse + minimal code |
 | 2 | **Platform detection + MCP config gen** — Extend `config_gen.py` + `matrix.json` with all 6 MCP tools. Merge-into-existing, idempotent, atomic writes. | `src/config_gen.py`, `platforms/matrix.json` | Test: install → re-install (must be idempotent), uninstall → re-install (must work) |
 | 3 | **npx bootstrap entry point** — `npx token-saver-meta init` does: copy AGENTS.md → detect platform → install MCP tools → index → summary. | `src/cli.py`, `package.json` (npm publish) | Test: `npx token-saver-meta init` on clean project → all tools active |
-| 4 | **GitNexus + CGC integration** — Auto-detect, generate MCP config, run analyze/index. Per-tool error isolation. | `src/tools/gitnexus_tool.py`, `src/tools/cgc_tool.py` | Test: GitNexus MCP tools respond, CGC MCP tools respond |
+| 4 | **CBM + CGC integration** — Auto-detect, generate MCP config, run analyze/index. Per-tool error isolation. | `src/tools/cbm_tool.py`, `src/tools/cgc_tool.py` | Test: CBM MCP tools respond, CGC MCP tools respond |
 | 5 | **RTK integration** — Auto-detect platform, download binary, inject hook. 3 install paths (PreToolUse hook / shell alias / manual). | `src/tools/rtk_tool.py` | Test: `rtk git status` produces compressed output |
 | 6 | **codesight + Repomix integration** — Run once, generate output files. Detect staleness on re-run. | `src/tools/codesight_tool.py`, `src/tools/repomix_tool.py` | Test: CODESIGHT.md + repomix-output.txt exist, content valid |
 | 7 | **ContextSlimAI integration** — `npx contextslim init`, verify rules + ignore files generated. | `src/tools/contextslim_tool.py` | Test: `.contextslim/rules.md` + optimized `.gitignore` exist |
@@ -553,7 +553,7 @@ D's base layer IS Option C plus ponytail. The philosophy of "make the foundation
 |------|--------|
 | jcodemunch-mcp | Dual-use license — needs separate commercial path |
 | sdl-mcp | Source-available license — review terms |
-| opentoken, omni, tokensave | Evaluate vs existing tools (RTK, GitNexus) |
+| opentoken, omni, tokensave | Evaluate vs existing tools (RTK, CBM) |
 | Deblank, racs, toon | Need custom wrappers for agent integration |
 | flowork_Router, CometCLI, supamem | Heavy infra or copyleft concerns |
 | Desktop app (Tauri) | Highest-effort distribution channel |
@@ -575,6 +575,7 @@ D's base layer IS Option C plus ponytail. The philosophy of "make the foundation
 | 2026-06-18 | T4/T5/T6 are optional-only in v1 | Heaviest types (T1+T2 at 55-280K/session) get core coverage first. Lower-waste types get optional. |
 | 2026-06-13 | Only 1 genuine conflict (RTK vs lean-ctx shell hook) | Sequential thinking resolved 5 false conflicts. |
 | 2026-06-13 | Core/optional/deep-study split | Research-established. Core=always, optional=one-click, deep-study=v2. |
+| 2026-07-02 | Replaced GitNexus with CBM (codebase-memory-mcp) | MIT license, 24k stars, pure C, 158 languages. Sidecar MCP server (cbm_sidecar/) backfills context/rename/route_map tools. |
 
 # APPENDIX B: Reference Sources
 
@@ -639,3 +640,15 @@ These are original Python implementations created for token-saver-meta, inspired
 | Tool | Reason |
 |------|--------|
 | GitNexus | [PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/) — cannot redistribute in any commercial distribution. Listed here for attribution; NOT included in the product. |
+
+---
+
+## Acknowledgments
+
+This project builds on ideas from the open-source community. The token-saving rules originated from:
+- caveman (MIT) — prose style rules
+- ponytail (MIT) — code minimalism rules (YAGNI ladder)
+- LG-token-saver (MIT) — operational efficiency rules
+- kevin-copilot (MIT) — structured output rules
+
+All tools bundled or referenced by this project are MIT or Apache-2.0 licensed. See individual sub-projects for details.
