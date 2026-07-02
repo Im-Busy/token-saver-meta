@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
-from tools.context import context
+from cbm_sidecar.tools.context import context
 
 @pytest.fixture
 def mock_cbm_db():
@@ -43,7 +43,7 @@ def test_context_not_found(mock_cbm_db):
 
 def test_context_edge_types_present():
     """Verify edge type constants."""
-    from tools.context import EDGE_TYPES
+    from cbm_sidecar.tools.context import EDGE_TYPES
     assert "CALLS" in EDGE_TYPES
     assert "IMPLEMENTS" in EDGE_TYPES
     assert len(EDGE_TYPES) == 4

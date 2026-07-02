@@ -2,7 +2,7 @@
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from cbm_sidecar.db import open_cbm_db
+from db import open_cbm_db
 
 EDGE_TYPES = {"CALLS", "IMPLEMENTS", "INHERITS", "IMPORTS"}
 
