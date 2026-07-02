@@ -58,6 +58,7 @@ packages = ["src/"]
 "tscg-py/src/tscg" = "tscg"
 "token-saver-mem/src/token_saver_mem" = "token_saver_mem"
 "contextslim-py/src/contextslim" = "contextslim"
+"platforms/matrix.json" = "platforms/matrix.json"
 
 [tool.ruff]
 line-length = 120
