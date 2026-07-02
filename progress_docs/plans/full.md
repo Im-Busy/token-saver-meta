@@ -49,7 +49,7 @@ enhancement_tracks:
 ### Key Decisions
 
 - **Core bundle:** 10 tools (GitNexus, CGC, RTK, codesight, Repomix, caveman, LG-token-saver, ContextSlimAI, kevin-copilot, installer)
-- **Optional modules:** 8 tools (TSCG, lean-ctx, LLMLingua, codex-agent-mem, Loom, Deblank, toon, orchestkit-extracted)
+- **Optional modules:** 6 tools (TSCG, lean-ctx, LLMLingua, codex-agent-mem, Loom, orchestkit-extracted) — Deblank, toon deferred to v2
 - **Deep study queue:** 8 tools (tokensave, opentoken, omni, trace-mcp, jcodemunch, sdl-mcp, racs, code-context-engine)
 - **Only 1 genuine conflict** across all 44 tools (RTK shell hook vs lean-ctx shell hook — resolved)
 
@@ -105,8 +105,6 @@ enhancement_tracks:
 | P1 | LLMLingua GPU detection | Auto-detect GPU, advise user, optional install |
 | P2 | codex-agent-mem integration | MCP config for continuity packs |
 | P2 | Loom integration | MCP config for persistent symbol index |
-| P2 | Deblank integration | REST API wrapper for whitespace stripping |
-| P2 | toon integration | Serialization transform module |
 | P2 | orchestkit skills extraction | Package universal skills as platform-agnostic SKILL.md files |
 
 ---

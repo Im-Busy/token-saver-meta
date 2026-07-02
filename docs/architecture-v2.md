@@ -70,9 +70,9 @@ What's sent to the LLM API. Currently single-coverage in core — needs optional
 | Tool | Mechanism | Savings | Blockers |
 |------|-----------|:-------:|----------|
 | **LLMLingua-2** (optional) | ML-based perplexity token removal | 5-20x | Needs GPU (auto-detect) |
-| **Deblank** (optional) | Bidirectional formatting strip | ~34% C, ~9% Python | REST API wrapper needed |
+| **Deblank** (defer v2) | Bidirectional formatting strip | ~34% C, ~9% Python | REST API wrapper needed |
 | **racs** (defer v2) | Provider cache-breakpoint planning | 88% cache hits | Library, needs integration |
-| **toon** (optional) | Compact data serialization | ~40% | Drop-in JSON→TOON converter |
+| **toon** (defer v2) | Compact data serialization | ~40% | Drop-in JSON→TOON converter |
 
 **Current weakness:** T4 has zero core tools. All T4 tools are optional or deferred. This is the #1 gap in v1.
 
@@ -639,3 +639,15 @@ These are original Python implementations created for token-saver-meta, inspired
 | Tool | Reason |
 |------|--------|
 | GitNexus | [PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/) — cannot redistribute in any commercial distribution. Listed here for attribution; NOT included in the product. |
+
+---
+
+## Acknowledgments
+
+This project builds on ideas from the open-source community. The token-saving rules originated from:
+- caveman (MIT) — prose style rules
+- ponytail (MIT) — code minimalism rules (YAGNI ladder)
+- LG-token-saver (MIT) — operational efficiency rules
+- kevin-copilot (MIT) — structured output rules
+
+All tools bundled or referenced by this project are MIT or Apache-2.0 licensed. See individual sub-projects for details.

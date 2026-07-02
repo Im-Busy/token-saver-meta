@@ -186,7 +186,7 @@
 ### I24 — Whitespace Removal Doesn't Degrade LLM Accuracy
 - **Source:** Deblank (ICSE'26 Distinguished Paper)
 - **Category:** T4 (Prompt Input)
-- **Actionable?** YES — bundle
+- **Actionable?** YES — bundle [deferred to v2]
 - **Evidence:** Academically proven across FIM tasks. ~34% on C-family, ~9% on Python. Bidirectional (unformat → send → reformat output).
 - **Summary:** Strip formatting before sending code to LLM. Reformatted after. Accuracy preserved. ICSE'26 validated.
 
@@ -229,7 +229,7 @@
 ### I29 — Data Format Choice Affects Token Count by 40%
 - **Source:** toon (toon-format)
 - **Category:** T4 (Prompt Input) + T6 (Tool Schema)
-- **Actionable?** YES — bundle as serialization module
+- **Actionable?** YES — bundle as serialization module [deferred to v2]
 - **Evidence:** ~40% fewer tokens vs JSON. Header-declared tabular arrays: declare field names once, stream data rows. Slightly better accuracy (76.4% vs 75.0%).
 - **Summary:** Compact serialization format saves tokens on every structured data exchange.
 

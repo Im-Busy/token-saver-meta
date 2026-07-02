@@ -125,8 +125,8 @@
 ### I16 — Whitespace Removal Is Academically Validated
 - **Source:** Deblank (ICSE'26 Distinguished Paper)
 - **Category:** T4 (Prompt Input)
-- **Actionable?** YES — bundle
-- **Summary:** Removing code formatting does NOT degrade LLM accuracy (academically proven). Saves ~34% on C-family, ~9% on Python. Deblank + reformat is bidirectional.
+- **Actionable?** YES — bundle [deferred to v2]
+- **Summary:** Removing code formatting does NOT degrade LLM accuracy (academically proven). Saves ~34% on C-family, ~9% on Python. Deblank + reformat is bidirectional. [deferred to v2]
 
 ---
 

@@ -56,8 +56,8 @@ Each tool scored on 3 axes (1-10 each):
 | 17 | **racs** | 7 | 4 | 8 | **6.3** | Cache optimization only |
 | 18 | **ContextSlimAI** | 7 | 5 | 5 | **5.9** | CLI wrappers + rules gen |
 | 19 | **lowfat** | 6 | 5 | 6 | **5.7** | Complements RTK |
-| 20 | **Deblank** | 5 | 4 | 8 | **5.3** | Academic validation |
-| 21 | **toon** | 4 | 6 | 5 | **4.8** | Data format only |
+| 20 | **Deblank** | 5 | 4 | 8 | **5.3** | Academic validation [deferred to v2] |
+| 21 | **toon** | 4 | 6 | 5 | **4.8** | Data format only [deferred to v2] |
 | 22 | **ponytail** | 7 | 5 | 6 | **6.2** | YAGNI ladder, ~22% tokens, ~54% LOC |
 | 23 | **SkillOpt** | 6 | 4 | 7 | **5.6** | Skill optimization, 300-2K tok artifacts |
 

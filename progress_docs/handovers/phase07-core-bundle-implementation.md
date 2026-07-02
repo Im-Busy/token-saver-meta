@@ -91,8 +91,8 @@ The project builds on the existing **gitnexus_CGC_combo** project (which already
 | 13 | **LLMLingua-2** | `token-saver enable llmlingua` | GPU auto-detect. CPU: warn and ask. |
 | 14 | **codex-agent-mem** | `token-saver enable codex-agent-mem` | MCP config for continuity packs |
 | 15 | **Loom** | `token-saver enable loom` | MCP config for persistent symbol index |
-| 16 | **Deblank** | `token-saver enable deblank` | REST API wrapper for whitespace stripping |
-| 17 | **toon** | `token-saver enable toon` | Serialization transform module |
+| 16 | **Deblank** | `token-saver enable deblank` | REST API wrapper for whitespace stripping [deferred to v2] |
+| 17 | **toon** | `token-saver enable toon` | Serialization transform module [deferred to v2] |
 | 18 | **orchestkit-skills** | `token-saver enable orchestkit-skills` | Universal skills extracted from orchestkit |
 
 ---
