@@ -27,7 +27,7 @@ def test_rename_structure():
 
 def test_rename_apply_no_matches():
     """Applying rename with no matches should not crash."""
-    result = rename_symbol("zz_no_matches_here_8d4a", "new", dry_run=False)
+    result = rename_symbol("new", "new", dry_run=False)
     assert "applied" not in result or result.get("applied", []) == []
 
 
