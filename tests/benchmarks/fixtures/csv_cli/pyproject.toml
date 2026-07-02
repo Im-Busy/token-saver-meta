@@ -1,0 +1,4 @@
+[project]
+name = "csv-cli"
+version = "0.1.0"
+description = "CSV to JSON CLI tool"
