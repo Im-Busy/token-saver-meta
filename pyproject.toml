@@ -66,4 +66,5 @@ target-version = "py310"
 [dependency-groups]
 dev = [
     "pytest>=9.1.0",
+    "tiktoken>=0.7.0",
 ]
