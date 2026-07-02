@@ -122,3 +122,35 @@ def install_cbm() -> dict:
         
     except Exception as e:
         return {"status": "error", "message": str(e)}
+
+
+def generate_cbm_config(agent_type: str) -> dict:
+    """Generate MCP server config for CBM. Returns {status, config, message}."""
+    result: dict = {"status": "ok", "config": None, "message": ""}
+
+    binary_name = "cbm.exe" if platform.system() == "Windows" else "cbm"
+    binary_path = get_install_path() / binary_name
+
+    if not binary_path.exists():
+        result["status"] = "warn"
+        result["message"] = f"CBM binary not found at {binary_path}. Run install_cbm() first."
+        return result
+
+    binary_str = str(binary_path)
+
+    supported = {"opencode", "claude"}
+    if agent_type not in supported:
+        result["status"] = "error"
+        result["message"] = f"Unsupported agent: {agent_type}"
+        return result
+
+    result["config"] = {
+        "mcpServers": {
+            "codebase-memory-mcp": {
+                "command": binary_str,
+                "args": [],
+            }
+        }
+    }
+
+    return result
