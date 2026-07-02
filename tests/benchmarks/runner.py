@@ -53,6 +53,36 @@ class ClaudeCodeAdapter:
             "tool_calls": []
         }
 
+class CodexAdapter:
+    """Invokes Codex CLI (OpenAI). Stub — raises NotImplementedError."""
+    def __init__(self):
+        self.binary = shutil.which("codex") or "codex"
+    
+    def invoke(self, prompt: str, project_path: Path) -> dict:
+        raise NotImplementedError(
+            "Codex CLI not found. Install from https://github.com/openai/codex"
+        )
+
+class GeminiAdapter:
+    """Invokes Gemini CLI (Google). Stub — raises NotImplementedError."""
+    def __init__(self):
+        self.binary = shutil.which("gemini") or "gemini"
+    
+    def invoke(self, prompt: str, project_path: Path) -> dict:
+        raise NotImplementedError(
+            "Gemini CLI not found. Install from https://github.com/google-gemini/gemini-cli"
+        )
+
+class AiderAdapter:
+    """Invokes Aider CLI. Stub — raises NotImplementedError."""
+    def __init__(self):
+        self.binary = shutil.which("aider") or "aider"
+    
+    def invoke(self, prompt: str, project_path: Path) -> dict:
+        raise NotImplementedError(
+            "Aider CLI not found. Install from https://aider.chat/"
+        )
+
 @dataclass
 class TaskConfig:
     task_id: str
@@ -86,6 +116,9 @@ class BenchmarkRunner:
         self._adapters = {
             "opencode": OpenCodeAdapter(),
             "claude": ClaudeCodeAdapter(),
+            "codex": CodexAdapter(),
+            "gemini": GeminiAdapter(),
+            "aider": AiderAdapter(),
         }
     
     def run_task(self, config: TaskConfig) -> list[TrialResult]:
