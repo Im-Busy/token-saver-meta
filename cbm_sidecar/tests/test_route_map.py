@@ -12,7 +12,7 @@ def mock_cbm_db():
     conn = sqlite3.connect(tmp.name)
     conn.execute(
         "CREATE TABLE nodes ("
-        "id INTEGER PRIMARY KEY, name TEXT, file TEXT, label TEXT)"
+        "id INTEGER PRIMARY KEY, name TEXT, file_path TEXT, label TEXT)"
     )
     conn.execute(
         "INSERT INTO nodes VALUES (1, '/api/users', 'server.js', 'Route')"
@@ -47,10 +47,17 @@ def test_route_map_filter(mock_cbm_db):
 
 
 def test_route_map_no_routes():
+    old_path = os.environ.get("CBM_DB_PATH")
     os.environ["CBM_DB_PATH"] = "/nonexistent/db"
-    result = route_map()
-    assert result["total"] == 0
-    assert result["routes"] == []
+    try:
+        result = route_map()
+        assert result["total"] == 0
+        assert result["routes"] == []
+    finally:
+        if old_path:
+            os.environ["CBM_DB_PATH"] = old_path
+        else:
+            del os.environ["CBM_DB_PATH"]
 
 
 def test_heuristic_warning_present():

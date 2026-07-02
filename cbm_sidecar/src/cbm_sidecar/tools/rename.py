@@ -14,12 +14,12 @@ def rename(symbol_name: str, new_name: str, file_path: str = None, dry_run: bool
     # Phase 1: Graph search
     try:
         conn = open_cbm_db(readonly=True)
-        query = "SELECT DISTINCT n.name, n.file FROM nodes n WHERE n.name = ?"
+        query = "SELECT DISTINCT n.name, n.file_path FROM nodes n WHERE n.name = ?"
         rows = conn.execute(query, [symbol_name]).fetchall()
         for row in rows:
             matches.append({
                 "symbol": row["name"],
-                "file": row["file"],
+                "file": row["file_path"],
                 "confidence": "graph"
             })
         conn.close()

@@ -10,7 +10,7 @@ def route_map(route: str = None) -> dict:
     # Phase 1: Find Route nodes from CBM
     try:
         conn = open_cbm_db(readonly=True)
-        query = "SELECT DISTINCT n.name, n.file FROM nodes n WHERE n.label = 'Route'"
+        query = "SELECT DISTINCT n.name, n.file_path FROM nodes n WHERE n.label = 'Route'"
         params = []
         if route:
             query += " AND n.name LIKE ?"
@@ -20,7 +20,7 @@ def route_map(route: str = None) -> dict:
         for row in rows:
             route_entry = {
                 "route": row["name"],
-                "handler_file": row["file"],
+                "handler_file": row["file_path"],
                 "consumers": [],
                 "confidence": "graph",
             }

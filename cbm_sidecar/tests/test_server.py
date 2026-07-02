@@ -1,19 +1,28 @@
 import pytest
+import os
 from pathlib import Path
 
 def test_db_path_detection():
     from cbm_sidecar.db import get_cbm_db_path
-    path = get_cbm_db_path()
-    assert ".cache" in str(path) or "CBM_DB_PATH" in str(path)
-    assert "codebase-memory-mcp" in str(path)
+    path = str(get_cbm_db_path())
+    # Either the real cache path, or an env-overridden path
+    is_cache = ".cache" in path and "codebase-memory-mcp" in path
+    is_override = "CBM_DB_PATH" in os.environ
+    assert is_cache or is_override, f"unexpected path: {path}"
 
 def test_cbm_db_not_found_graceful():
     from cbm_sidecar.db import open_cbm_db
     import os
-    # Set to non-existent path
+    old_path = os.environ.get("CBM_DB_PATH")
     os.environ["CBM_DB_PATH"] = "/nonexistent/cbm.db"
-    with pytest.raises(FileNotFoundError):
-        open_cbm_db()
+    try:
+        with pytest.raises(FileNotFoundError):
+            open_cbm_db()
+    finally:
+        if old_path:
+            os.environ["CBM_DB_PATH"] = old_path
+        else:
+            del os.environ["CBM_DB_PATH"]
 
 def test_sidecar_db_creates():
     from cbm_sidecar.db import open_sidecar_db

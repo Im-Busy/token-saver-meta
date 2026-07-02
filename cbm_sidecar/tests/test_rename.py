@@ -1,9 +1,7 @@
 import pytest, tempfile
 from pathlib import Path
-import sys
 
-sys.path.insert(0, str(Path(__file__).parent.parent / "src" / "cbm_sidecar"))
-from tools.rename import rename as rename_symbol
+from cbm_sidecar.tools.rename import rename as rename_symbol
 
 
 def test_rename_dry_run_default():
