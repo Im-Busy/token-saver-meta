@@ -6,22 +6,22 @@ import shutil
 
 
 def run_indexing(project_path: Path) -> dict:
-    """Run GitNexus and CGC indexing on the project."""
+    """Run CBM and CGC indexing on the project."""
     result = {}
 
-    # GitNexus indexing
+    # CBM indexing
     try:
         subprocess.run(
-            ["npx", "gitnexus", "analyze", "--embeddings", "--skills"],
+            ["npx", "cbm", "index", "."],
             cwd=str(project_path), capture_output=True, text=True, timeout=300
         )
-        result["gitnexus"] = {"status": "ok"}
+        result["cbm"] = {"status": "ok"}
     except subprocess.TimeoutExpired:
-        result["gitnexus"] = {"status": "warn", "message": "GitNexus analyze timed out (300s)"}
+        result["cbm"] = {"status": "warn", "message": "CBM index timed out (300s)"}
     except FileNotFoundError:
-        result["gitnexus"] = {"status": "skip", "message": "npx not available"}
+        result["cbm"] = {"status": "skip", "message": "npx not available"}
     except Exception as e:
-        result["gitnexus"] = {"status": "warn", "message": str(e)[:200]}
+        result["cbm"] = {"status": "warn", "message": str(e)[:200]}
 
     # CGC indexing
     try:
@@ -46,9 +46,9 @@ def run_verification(project_path: Path) -> dict:
     result = {}
     project_root = project_path.resolve()
 
-    # GitNexus
-    gn = shutil.which("gitnexus") or shutil.which("npx")
-    result["gitnexus"] = {"status": "ok" if gn else "warn", "installed": gn is not None}
+    # CBM
+    cbm = shutil.which("cbm") or shutil.which("npx")
+    result["cbm"] = {"status": "ok" if cbm else "warn", "installed": cbm is not None}
 
     # CGC
     cgc = shutil.which("cgc")

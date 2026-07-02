@@ -43,14 +43,14 @@
 
 ### INTELLIGENCE LAYER (auto-install, Node.js)
   CGC/codegraph (T1, npx, SQLite+FTS5) | codesight (T1, npx) | Repomix (T1, npx)
-  → GitNexus moved to Optional (PolyForm NC license)
+  → GitNexus moved to CBM (codebase-memory-mcp — MIT, 24k stars, pure C, 158 languages)
 
 ### COMPRESSION LAYER (auto-install)
   RTK (T2, binary) | ContextSlimAI (T2, ✅ Python rewrite complete — contextslim-py/)
 
 ### OPTIONAL MODULES (one-click enable)
   TSCG (T6, 🔴 Python rewrite pending) | Unified T5 Memory (🔴 merge pending)
-  LLMLingua-2 (T4) | SkillOpt (T7) | GitNexus (T1, non-commercial only)
+  LLMLingua-2 (T4) | SkillOpt (T7) | CBM (T1, via codebase-memory-mcp)
 
 ---
 

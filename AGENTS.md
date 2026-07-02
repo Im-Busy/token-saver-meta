@@ -217,3 +217,17 @@ Source code (`src/`, `cli.js`), tests (`tests/`), documentation (`docs/`, `AGENT
 28. **Always verbatim:** file paths, exact commands, exact error messages, code symbols, API names, commit-type keywords (feat/fix/docs/test/chore), input validation at trust boundaries, error handling that prevents data loss.
 <!-- TOKEN_SAVER_END -->
 
+<!-- cbm:start -->
+## CBM — Codebase Memory
+
+CBM integration pending — see `templates/cbm_agents_md_block.md`.
+
+Generated skill references preserved below for platform compatibility:
+<!-- cbm:end -->
+
+<!-- cbm-leanctx:start -->
+## Code Intelligence + Context Persistence
+
+CBM integration with lean-ctx is deferred. CBM handles codebase memory natively;
+lean-ctx cross-session persistence will be re-evaluated after CBM bootstrap.
+<!-- cbm-leanctx:end -->

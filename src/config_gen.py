@@ -1,5 +1,5 @@
 """
-Multi-platform MCP config generator for GitNexus + CGC combo.
+Multi-platform MCP config generator for CBM + CGC combo.
 
 Reads platforms/matrix.json and generates the correct MCP server configuration
 for any supported AI coding platform. Handles merge-with-existing, create-new,
@@ -90,7 +90,7 @@ def generate_mcp_config(platform_id: str, cgc_path: str | None = None) -> dict |
 
 
 def generate_cgc_only_config(platform_id: str, project_path: str) -> dict | None:
-    """Generate MCP config with only CGC (no GitNexus) for a single platform.
+    """Generate MCP config with only CGC (standalone) for a single platform.
     Returns None if platform unknown. project_path is accepted for future use
     (e.g., CGC index path), but not currently embedded in npx commands."""
     matrix = load_matrix()
@@ -173,7 +173,7 @@ def write_mcp_config(
 
     if not config_file.exists() or should_create:
         config_file.write_text(json.dumps(new_config, indent=2) + "\n", encoding="utf-8")
-        return ("created", f"Created {config_file} with gitnexus + codegraphcontext")
+        return ("created", f"Created {config_file} with cbm + codegraphcontext")
 
 
 def validate_platform(platform_id: str) -> tuple[bool, str]:
@@ -236,7 +236,7 @@ def cmd_setup(project_path: Path, cgc_path: str | None, skip_index: bool = False
     matrix = load_matrix()
 
     print(f"\n{'=' * 60}")
-    print(f"GitNexus + CGC Setup")
+    print(f"CBM + CGC Setup")
     print(f"Project: {project_path}")
     print(f"{'=' * 60}\n")
 
@@ -263,19 +263,19 @@ def cmd_setup(project_path: Path, cgc_path: str | None, skip_index: bool = False
 
     if skip_index:
         print("\nSkipping indexing (--skip-index). Run manually:")
-        print(f"  npx gitnexus analyze --embeddings --skills")
+        print(f"  npx cbm index .")
         print(f"  uv run cgc index {project_path}")
         return
 
-    print(f"\n--- GitNexus Indexing ---")
+    print(f"\n--- CBM Indexing ---")
     try:
         subprocess.run(
-            ["npx", "gitnexus", "analyze", "--embeddings", "--skills"],
+            ["npx", "cbm", "index", "."],
             cwd=str(project_path), check=True,
         )
-        print("  [OK] GitNexus indexed successfully")
+        print("  [OK] CBM indexed successfully")
     except subprocess.CalledProcessError:
-        print("  [WARN] GitNexus indexing failed. Run manually: npx gitnexus analyze --embeddings --skills")
+        print("  [WARN] CBM indexing failed. Run manually: npx cbm index .")
     except FileNotFoundError:
         print("  [WARN] npx not found. Install Node.js >= 18 and try again.")
 
@@ -296,7 +296,7 @@ def cmd_setup(project_path: Path, cgc_path: str | None, skip_index: bool = False
     print(f"Next steps:")
     print(f"  1. Restart your AI coding tool to load MCP servers")
     print(f"  2. Start CGC watcher: uv run cgc watch {project_path}/src")
-    print(f"  3. Verify: npx gitnexus status && uv run cgc stats {project_path}")
+    print(f"  3. Verify: npx cbm status && uv run cgc stats {project_path}")
 
     if errors:
         print(f"\n{errors} manual/external actions needed. See [MANUAL] entries above.")
@@ -410,7 +410,7 @@ def detect_platform_instructions_file(platform_id: str) -> Path | None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="GitNexus + CGC combo: MCP config generator and setup orchestrator"
+        description="CBM + CGC combo: MCP config generator and setup orchestrator"
     )
     subparsers = parser.add_subparsers(dest="command")
 
@@ -429,7 +429,7 @@ def main() -> None:
     setup_parser.add_argument(
         "--skip-index",
         action="store_true",
-        help="Skip GitNexus and CGC indexing (config generation only)",
+        help="Skip CBM and CGC indexing (config generation only)",
     )
 
     parser.add_argument(

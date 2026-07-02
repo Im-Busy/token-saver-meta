@@ -1,4 +1,4 @@
-"""MCP server installer for GitNexus and CGC."""
+"""MCP server installer for CBM and CGC."""
 
 from pathlib import Path
 import subprocess
@@ -6,30 +6,30 @@ import shutil
 
 
 def install_mcp_servers(project_path: Path, platforms: list[str], cgc_path: str | None = None) -> dict:
-    """Install MCP servers (GitNexus + CGC) for all detected platforms."""
+    """Install MCP servers (CBM + CGC) for all detected platforms."""
     from src.config_gen import load_matrix, generate_server_entry, write_mcp_config
 
-    result = {"gitnexus": {"status": "ok", "platforms": {}}, "cgc": {"status": "ok", "platforms": {}}}
+    result = {"cbm": {"status": "ok", "platforms": {}}, "cgc": {"status": "ok", "platforms": {}}}
     matrix = load_matrix()
     mcp_servers = matrix.get("mcp_servers", {})
 
-    # GitNexus: just generate config (npx auto-fetches on use)
-    if "gitnexus_server" in mcp_servers:
-        gn_def = mcp_servers["gitnexus_server"]
+    # CBM: just generate config (npx auto-fetches on use)
+    if "cbm_server" in mcp_servers:
+        cbm_def = mcp_servers["cbm_server"]
         for platform_id in platforms:
             try:
                 pdef = matrix["platforms"].get(platform_id)
                 if not pdef:
                     continue
                 family = pdef["mcp_family"]
-                generate_server_entry("gitnexus", gn_def, family)
+                generate_server_entry("cbm", cbm_def, family)
                 status, msg = write_mcp_config(platform_id, project_path)
-                result["gitnexus"]["platforms"][platform_id] = {"status": status, "message": msg}
+                result["cbm"]["platforms"][platform_id] = {"status": status, "message": msg}
             except Exception as e:
-                result["gitnexus"]["platforms"][platform_id] = {"status": "warn", "message": str(e)}
+                result["cbm"]["platforms"][platform_id] = {"status": "warn", "message": str(e)}
     else:
-        result["gitnexus"]["status"] = "warn"
-        result["gitnexus"]["message"] = "gitnexus_server not in matrix"
+        result["cbm"]["status"] = "warn"
+        result["cbm"]["message"] = "cbm_server not in matrix"
 
     # CGC: attempt install via uv
     if "codegraphcontext_server" in mcp_servers:

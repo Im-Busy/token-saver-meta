@@ -98,3 +98,11 @@ Each tool scored on 3 axes (1-10 each):
 | 45 | **boost** | Proprietary (JFrog) |
 | 46 | **OnlyCLI** | Defer (niche: API-only MCP replacement) |
 | 47 | **token-saver-sirugao** | Too lightweight (single SKILL.md) |
+
+---
+
+## Historical — Replaced or Decommissioned
+
+| # | Tool | Replacement | Details |
+|---|------|-------------|---------|
+| 48 | **GitNexus** | CBM (codebase-memory-mcp) | GitNexus replaced by CBM v0.8.1 (codebase-memory-mcp). MIT license, 24k stars, pure C, 158 languages. Formerly Tier A — graph-based code intelligence with impact analysis.
